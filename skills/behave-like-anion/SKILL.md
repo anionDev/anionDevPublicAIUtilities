@@ -3,7 +3,7 @@ name: behave-like-anion
 description: Explain principles of how to behave.
 purpose: "Behavior guidance for agents."
 tags: behavior, guidance
-version: 1.0.2
+version: 1.0.3
 ---
 
 # Skill behave-like-anion
@@ -34,6 +34,7 @@ When investigating issues: In the end show a summary to the user which contains 
 ## Developing
 
 Use clean-code-principles when developing code.
+Never add fallback-mechanisms ofr anything unless the user explicitly asks for it.
 Use design-pattern when developing code when it is useful. To check whether it would be useful think about advantages for the future like a better overview and extensibility.
 Never developing a loop which waits until something works which tries again on fail unless the user explicitly asks for it.
 Never developing an exception-catchings-mechanism when the catch-block is doing basically the same but on another way as fallback-mechanism unless the user explicitly asks for it.
