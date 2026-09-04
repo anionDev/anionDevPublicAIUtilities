@@ -4,7 +4,7 @@ description: Explain principles of how to behave.
 metadata:
   purpose: "Behavior guidance for agents."
   tags: behavior, guidance
-  version: 1.0.4
+  version: 1.0.5
 ---
 
 # Skill behave-like-anion
@@ -28,7 +28,8 @@ When you summarize things, always make it clear for the reader if something is a
 
 ## Problem analysis
 
-If there is already a problem, first find the root-cause of the problem using the "root-cause"-skill to identify the real root-cause.
+If there is already a problem, first find the root-cause of the problem using the `root-cause`-skill if available to identify the real root-cause.
+In any case:
 For problems: Make suggestions how to fix the relevant root cause.
 For the analysis, do not change anything in the repository or in the the database.
 Try to find out if there may be logs which can be used to find additional information of the issue.
@@ -45,6 +46,7 @@ Avoid Spaghetti-code. Try to make related changes at similar places as much as p
 Always follow existing coding-style and coding-conventions.
 Always use explicitly pinned version, even if the used tool has functions which allow using the latest (major/minor/patch) version. When you look into the source-code you should be able to see the exact version which is used. This is important for reproducibility and for security analysis.
 Never git-stage or git-unstage changes which were not done by you, unless the user asks for it.
+For large or non-trivial changes: Always use the `software-architecture`-skill if available.
 
 ## Intermediate-statement
 
