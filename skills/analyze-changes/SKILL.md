@@ -1,9 +1,10 @@
 ---
 name: analyze-changes
 description: Analyze the changes on the current branch.
-purpose: "Analysis for repositories."
-tags: analysis, git
-version: 1.0.0
+metadata:
+  purpose: "Analysis for repositories."
+  tags: analysis, git
+  version: 1.0.0
 ---
 
 Summarize the uncommitted git-changes of this branch in short and write them to the current changelog-file if a changelog exists in the current repository and if they are not already listed there.

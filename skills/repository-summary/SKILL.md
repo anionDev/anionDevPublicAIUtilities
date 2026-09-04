@@ -1,9 +1,10 @@
 ---
 name: repository-summary
 description: Provides a summary of the repository, including its purpose, structure, and key components.
-purpose: "Analysis for repositories."
-tags: analysis, documentation
-version: 1.0.0
+metadata:
+  purpose: "Analysis for repositories."
+  tags: analysis, documentation
+  version: 1.0.0
 ---
 Write a summary of the repository, including its purpose, structure, and key components.
 Things to consider:

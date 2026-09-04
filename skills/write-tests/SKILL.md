@@ -1,9 +1,10 @@
 ---
 name: write-tests
 description: Ensures that there are tests for the most important functions of the project, by finding the untested code that actually carries risk, writing independent and atomic tests for it (including defined crash-behavior and abuse cases), and verifying that the new tests run green in the repository's own test setup. Use when the user asks to write, add or complete unit-tests, or when another skill requires test coverage.
-purpose: "Development for repositories."
-tags: development, testing
-version: 1.1.1
+metadata:
+  purpose: "Development for repositories."
+  tags: development, testing
+  version: 1.1.2
 ---
 
 # Write Tests
@@ -96,8 +97,15 @@ Hard rules:
 - **Self-contained state**: create what the test needs, and clean it up. Never rely on a shared
   mutable fixture that other tests also write to. Any test touching a database, file system or
   container must leave the environment as it found it.
-- **Clear structure**: arrange / act / assert, with a name that states scenario and expectation.
-  The failure message must make the cause obvious without opening a debugger.
+- **Triple-A-pattern (arrange, act, assert)**: every unit-test must be structured in exactly these
+  three phases and in this order — *arrange*: create the test-data, the object under test and the
+  fakes; *act*: execute the one operation under test, in a single statement wherever possible;
+  *assert*: verify the outcome. No assertion before the act-phase, no further arranging after it. If
+  a test needs a second act-phase, it is a second test. Keep the three phases visually separated
+  (blank line, or a `// Arrange` / `// Act` / `// Assert` comment when the surrounding tests already
+  use such comments).
+- **Clear structure**: a name that states scenario and expectation. The failure message must make
+  the cause obvious without opening a debugger.
 - **Assert the meaningful thing**: the observable behavior and the contract — not internal call
   order or private state, unless the interaction *is* the contract.
 - **Mock only what you must**: external systems, non-determinism and slow dependencies. Do not mock

@@ -1,9 +1,10 @@
 ---
 name: fix-small-bugs
 description: Fixes small bugs in a project.
-purpose: "Maintenance for repositories."
-tags: maintenance
-version: 1.1.0
+metadata:
+  purpose: "Maintenance for repositories."
+  tags: maintenance
+  version: 1.1.0
 ---
 
 # Skill fix-bugs

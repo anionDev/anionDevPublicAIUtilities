@@ -1,9 +1,10 @@
 ---
 name: root-cause
 description: Finds the root cause of a problem.
-purpose: "Problem diagnosis and analysis."
-tags: problem-solving, analysis
-version: 1.0.0
+metadata:
+  purpose: "Problem diagnosis and analysis."
+  tags: problem-solving, analysis
+  version: 1.0.0
 ---
 
 # Skill root-cause

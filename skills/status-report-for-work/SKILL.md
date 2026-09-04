@@ -1,9 +1,10 @@
 ---
 name: status-report-for-work
 description: Contains instructions about how to generate a status report for the current work.
-purpose: "Guidance for generating a status report for the current work."
-tags: status, report, guidance
-version: 1.0.0
+metadata:
+  purpose: "Guidance for generating a status report for the current work."
+  tags: status, report, guidance
+  version: 1.0.0
 ---
 
 # Skill status-report-for-work

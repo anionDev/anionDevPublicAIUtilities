@@ -1,9 +1,10 @@
 ---
 name: specification-verification
 description: Contains instructions about how to verify specifications.
-purpose: "Guidance for verifying specifications."
-tags: verification, guidance
-version: 1.0.0
+metadata:
+  purpose: "Guidance for verifying specifications."
+  tags: verification, guidance
+  version: 1.0.0
 ---
 
 # Skill specification-verification

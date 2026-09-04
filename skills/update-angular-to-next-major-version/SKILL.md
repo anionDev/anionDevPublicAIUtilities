@@ -1,9 +1,10 @@
 ---
 name: update-angular-to-next-major-version
 description: Updates an Angular project to the next major Angular version, based on the official changelog- and migration-information from the Angular websites.
-purpose: "Maintenance for repositories."
-tags: maintenance, angular, dependency-update
-version: 1.0.0
+metadata:
+  purpose: "Maintenance for repositories."
+  tags: maintenance, angular, dependency-update
+  version: 1.0.0
 ---
 
 # Skill update-angular-to-next-major-version

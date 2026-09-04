@@ -1,9 +1,10 @@
 ---
 name: fix-small-bug
 description: Do a small fix in a source-code-repository.
-purpose: "Maintenance for repositories."
-tags: maintenance, ai-self-test
-version: 1.0.0
+metadata:
+  purpose: "Maintenance for repositories."
+  tags: maintenance, ai-self-test
+  version: 1.0.0
 ---
 Implement one small fix in the repository if possible.
 Your change must fix a concrete clear bug if you found one. (Otherwise do nothing.)

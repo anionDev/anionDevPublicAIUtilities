@@ -1,9 +1,10 @@
 ---
 name: project-linting
 description: Does basic linting for the project which is not buiness-logic-specific.
-purpose: "Maintenance for repositories."
-tags: maintenance, linting
-version: 1.0.0
+metadata:
+  purpose: "Maintenance for repositories."
+  tags: maintenance, linting
+  version: 1.0.0
 ---
 Do the following things in this repository (not in the submodules):
 - Fix all typos in the code and documentation. Ignore files which are generated or git-ignored or have binary-content.

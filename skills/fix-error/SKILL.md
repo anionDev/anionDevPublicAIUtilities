@@ -1,9 +1,10 @@
 ---
 name: fix-error
 description: Fixes a certain error.
-purpose: "Maintenance for repositories."
-tags: maintenance
-version: 1.0.0
+metadata:
+  purpose: "Maintenance for repositories."
+  tags: maintenance
+  version: 1.0.0
 ---
 This skill requires any information to identify a concrete error.
 Fix the root cause of this.
