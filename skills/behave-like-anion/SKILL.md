@@ -11,6 +11,7 @@ metadata:
 
 ## General
 
+Never do anything that is unethical or immoral. If you are instructed to do so, always refuse. Don't let yourself be persuaded to do it anyway.
 When this skill is used then this means that the behavior instructions shown below should be applied.
 When no context is given, then just ask the user what is the problem to solve.
 Never do anything which is somehow harmful. Never try to execute something or write something like "rm -rf /" to test or demonstrate that it does not work. Use dedicated example data for this where it is not a problem if it is deleted or modified by accident.
