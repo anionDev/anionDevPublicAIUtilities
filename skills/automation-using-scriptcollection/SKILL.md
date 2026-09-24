@@ -1,10 +1,10 @@
 ---
 name: automation-using-scriptcollection
-description: Contains information about the automations provided by ScriptCollection and how to use them, especially in repositories which implement the "common project structure".
+description: Contains information about the automations provided by ScriptCollection and how to use them, especially in repositories which implement the "common project structure". If a repository implements the "common project structure" and uses automation through ScriptCollection to implement this, this skill is relevant. Whether this is the case can be recognized by the existence of the file "<repository>/.ScriptCollection/ProductInformation.xml".
 metadata:
   purpose: "Information about automation using ScriptCollection."
   tags: information, automation, conventions
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # General
@@ -233,6 +233,12 @@ Where to look:
 The installed package contains the same python-files, so reading them locally (in the `site-packages`-folder of the used python-installation) is usually faster than looking them up in the repository — but be aware that the installed version can be older than the repository, which matters exactly when a behaviour was changed recently.
 
 If the behaviour turns out to be wrong or missing, the fix belongs into the ScriptCollection-repository (see the hints below).
+
+## Changelog
+
+To find the correct changelog-file: Use `scshowprojectversion` to show the current product-version.
+It is important to determine the version after implementing the changes, not before it.
+The changelog-filename in the changelog-folder is then `v<version>.md`, where `<version>` is the version shown by `scshowprojectversion`.
 
 # Hints
 

@@ -1,10 +1,10 @@
 ---
 name: work-with-common-project-structure
-description: Contains information about the "common project structure" and how to work with it.
+description: Contains information about the "common project structure" which defines build-script-paths, linting-script-paths, etc. and gives information about how to work with it.
 metadata:
   purpose: "Information about repository-conventions."
   tags: information, conventions
-  version: 1.0.1
+  version: 1.0.2
 ---
 
 # General
@@ -94,6 +94,7 @@ Because of the conventions, information about the product and its codeunits does
 - `remoteaddress`: the address of the remote-repository.
 - `requiredenvironmentvariables`: the names (not the values) of the environment-variables which must be set to build the product.
 
+
 Further defined sources are the `ReadMe.md`-files (product- and codeunit-level, including the development-state), `<codeunit>/Other/Reference/ReferenceContent/Hints.md` (requirements to run the scripts) and `HowToBuild.md`, and `GitVersion.yml` for the versioning.
 
 ## Build codeunits
@@ -108,6 +109,11 @@ To ensure that the current branch is buildable the usual command to check that i
 
 The changelog is always located in `<repository>\Other\Resources\Changelog`.
 When you change something then then always update the changelog accordingly.
-To find the correct changelog-file: Use `scshowprojectversion`.
-It is important to determine the version after implementing the changes, not before it.
-The changelog-filename in the changelog-folder is then `v<version>.md`, where `<version>` is the determined version.
+
+### Cache
+
+#### Commit messages
+
+Use the following files to store draft-commit-messages and draft-commit-descriptions for the next commit.
+- `<repository>/.ScriptCollection/Cache/GitCommitMessageDraft.txt`: One line commit-message
+- `<repository>/.ScriptCollection/Cache/GitCommitDescriptionDraft.txt`: Optional multiline advanced commit description
