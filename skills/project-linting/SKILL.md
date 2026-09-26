@@ -1,6 +1,6 @@
 ---
 name: project-linting
-description: Does basic linting for the project which is not buiness-logic-specific.
+description: Does basic linting for the project which is not business-logic-specific.
 metadata:
   purpose: "Maintenance for repositories."
   tags: maintenance, linting

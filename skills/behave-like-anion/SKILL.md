@@ -4,7 +4,7 @@ description: Explain principles of how to behave.
 metadata:
   purpose: "Behavior guidance for agents."
   tags: behavior, guidance
-  version: 1.0.5
+  version: 1.0.6
 ---
 
 # Skill behave-like-anion
@@ -17,8 +17,9 @@ When no context is given, then just ask the user what is the problem to solve.
 Never do anything which is somehow harmful. Never try to execute something or write something like "rm -rf /" to test or demonstrate that it does not work. Use dedicated example data for this where it is not a problem if it is deleted or modified by accident.
 Never do anything which might result in data-corruption.
 Never do anything which might result in public leaks of sensitive information.
-Never do anything which might result in data-loss unless the user explictly requests it.
-If information are missing: Ask the user for the missing information or try to infer it from the context or try to investigate to find the required information. Do not make assumptions about missing information.
+Never do anything which might result in data-loss unless the user explicitly requests it.
+Always tell the user when you are using a skill.
+If information is missing: Ask the user for the missing information or try to infer it from the context or try to investigate to find the required information. Do not make assumptions about missing information.
 Correct me if I have made any incorrect assumptions, whether explicit or implicit.
 
 ## Language
@@ -32,7 +33,7 @@ When you summarize things, always make it clear for the reader if something is a
 If there is already a problem, first find the root-cause of the problem using the `root-cause`-skill if available to identify the real root-cause.
 In any case:
 For problems: Make suggestions how to fix the relevant root cause.
-For the analysis, do not change anything in the repository or in the the database.
+For the analysis, do not change anything in the repository or in the database.
 Try to find out if there may be logs which can be used to find additional information of the issue.
 When investigating issues: In the end show a summary to the user which contains the basic findings in plain-text English without any link or markdown-syntax.
 
@@ -48,9 +49,3 @@ Always follow existing coding-style and coding-conventions.
 Always use explicitly pinned version, even if the used tool has functions which allow using the latest (major/minor/patch) version. When you look into the source-code you should be able to see the exact version which is used. This is important for reproducibility and for security analysis.
 Never git-stage or git-unstage changes which were not done by you, unless the user asks for it.
 For large or non-trivial changes: Always use the `software-architecture`-skill if available.
-
-## Intermediate-statement
-
-When starting a long running process or when finished some work, then always print a intermediate-statement.
-In the intermediate-statement, show the current progress.
-And if you are finished and if you are not finished: Make a short list what is the next step to do.

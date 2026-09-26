@@ -108,7 +108,7 @@ To ensure that the current branch is buildable the usual command to check that i
 ## Changelog
 
 The changelog is always located in `<repository>\Other\Resources\Changelog`.
-When you change something then then always update the changelog accordingly.
+When you change something then always update the changelog accordingly.
 
 ### Cache
 

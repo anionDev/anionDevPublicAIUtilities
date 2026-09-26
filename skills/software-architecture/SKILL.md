@@ -9,8 +9,8 @@ metadata:
 
 # Skill software-architecture
 
-The structure of the software must always following the following principles:
-- Have a sensful and clear structure which is easy to understand for humans.
+The structure of the software must always follow the following principles:
+- Have a sensible and clear structure which is easy to understand for humans.
 - Have a clear separation of concerns and responsibilities.
 - Have a clear and well-defined interface between the different components.
 - Apply software design patterns where it makes sense.
