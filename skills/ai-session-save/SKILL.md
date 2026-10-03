@@ -1,10 +1,10 @@
 ---
 name: ai-session-save
-description: Exports the context of the current AI-session (knowledge, decisions, state, permissions, next steps) as one copy-pasteable block so that it can be imported later into a new session using the ai-session-restore-skill.
+description: Exports the context of the current AI-session (knowledge, decisions, state, permissions, next steps) as one copy-pasteable block and stores it as a file (by default in <repo>/.notes/) so that it can be imported later into a new session using the ai-session-restore-skill.
 metadata:
   purpose: "Session-management for AI-sessions."
   tags: session-management
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Skill ai-session-save
@@ -155,14 +155,32 @@ do, corrections they gave.>
 Leave out a section only if it is genuinely empty, and then write `- none` under its heading instead
 of deleting the heading.
 
-### 6. Offer persistence
+### 6. Persist the export
 
-After printing the block, offer — do not do it unasked — to additionally write it into a file. If
-the user wants that:
+Always write the export into a file as well — the printed block alone is lost as soon as the
+terminal-history is gone.
 
-- Write it outside the repository, or into a path which is git-ignored, and say explicitly that this
-  file can contain project-internals and should not be committed.
-- Use a name which sorts chronologically, e.g. `ai-session-export-<yyyy-MM-dd-HHmm>.md`.
+Determine the target-path:
+
+- If the user named a file, use exactly that path.
+- If the user named **no** file, use the default path
+  `<repo>/.notes/ai-session-<yyyy-MM-dd>.txt` if the folder `<repo>/.notes` exists, where `<repo>` is the root of the git-repository
+  (`git rev-parse --show-toplevel`) and `<yyyy-MM-dd>` is today's date.
+- If the primary working-directory is not inside a git-repository, use
+  `<primary-working-directory>/.notes/ai-session-<yyyy-MM-dd>.txt` instead if  `<primary-working-directory>/.notes` exists.
+- If the default-location does not exist, ask the user for a file-path to write to. Do **not** try to create a `.notes`-folder in a random location.
+
+Then:
+
+- Create the `.notes`-folder if it does not exist yet.
+- Never overwrite an existing export. If a file with that name already exists (because a session was
+  already saved on the same day), write `ai-session-<yyyy-MM-dd>-2.txt`, then `-3.txt`, and so on.
+- Check whether `.notes/` is git-ignored (`git check-ignore -q .notes`). If it is not, add a
+  `.notes/`-entry to the `.gitignore` of the repository and tell the user in one line that you did
+  so. An export contains project-internals and must not be committed.
+- Write the file-content without the surrounding four-backtick-fence: the file starts with the line
+  `# AI-Session-Export`.
+- Tell the user the path of the written file, so that it can be passed to `ai-session-restore`.
 
 ## Rules
 
@@ -185,3 +203,6 @@ the user wants that:
 - Are dead ends and denied permissions recorded, not only the successes?
 - Are secrets and personal data excluded?
 - Is the structure exactly the one above, so that `ai-session-restore` can read it?
+- Was the export written to a file, no existing export overwritten, and the path told to the
+  user?
+- Is the folder containing the export git-ignored?

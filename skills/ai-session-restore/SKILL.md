@@ -4,7 +4,7 @@ description: Imports an AI-session-export which was created with the ai-session-
 metadata:
   purpose: "Session-management for AI-sessions."
   tags: session-management
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Skill ai-session-restore
@@ -20,7 +20,8 @@ this skill lies as much in detecting that drift as in loading the context.
 
 ## When to use
 
-- The user pastes an "AI-Session-Export" block, or points at a file containing one.
+- The user pastes an "AI-Session-Export" block, points at a file containing one, or asks to
+  restore without naming anything — then the newest export in `<repo>/.notes/` is used if the folder exists. Otherwise, the user is prompted for the export-file-location.
 - The user says they want to continue the work of an earlier session.
 - Not for: understanding an unknown repository from scratch (use `repository-summary`), or reading
   project-documentation.
@@ -33,7 +34,15 @@ In this order:
 
 1. If the user pasted the export into the prompt, use it.
 2. If the user named a file, read it.
-3. If neither, ask the user for the export. Do **not** try to reconstruct it from git-history, changelogs or guesswork — a fabricated context is worse than no context.
+3. If the user named no file, look in the default-location of `ai-session-save`:
+   `<repo>/.notes/ai-session-*.txt`, where `<repo>` is the root of the git-repository
+   (`git rev-parse --show-toplevel`), or the primary working-directory if that is not inside a
+   git-repository. Take the newest export there (the names sort chronologically), name the file you
+   picked, and say how many other exports are lying next to it — the user may have meant another
+   one.
+4. If the default-location does not exist or contains no export, ask the user for the export. Do
+   **not** try to reconstruct it from git-history, changelogs or guesswork — a fabricated context is
+   worse than no context.
 
 Check that the block starts with `# AI-Session-Export` and carries a `Format-version`. If the
 format-version is higher than 1, say so and read it as best as possible, but tell the user that
@@ -119,7 +128,8 @@ From here on, work normally. The restore is finished; do not keep referring back
 
 ## Checklist for the agent
 
-- Export obtained from the user, not reconstructed?
+- Export obtained from the user or from `<repo>/.notes/`, not reconstructed?
+- If the export was picked automatically: was the chosen file named to the user?
 - Working-directory, branch and commit compared with the export?
 - Drift reported to the user before starting work?
 - Decisions adopted instead of re-litigated, dead ends not retried?

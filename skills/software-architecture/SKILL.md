@@ -1,17 +1,17 @@
 ---
 name: software-architecture
-description: Explains principles of software architecture which should be applied for designing and maintaining software systems.
+description: Explains principles of software architecture which should be applied for designing and maintaining software systems. Use this always when developing or reviewing or changing software-source-code.
 metadata:
   purpose: "Explains principles of software architecture for creating or reviewing software systems."
   tags: software-architecture
-  version: 1.0.1
+  version: 1.0.2
 ---
 
 # Skill software-architecture
 
 The structure of the software must always follow the following principles:
 - Have a sensible and clear structure which is easy to understand for humans.
-- Have a clear separation of concerns and responsibilities.
+- Have a clear separation of concerns and responsibilities. Consider the hexagonal-architecture-principles for this.
 - Have a clear and well-defined interface between the different components.
 - Apply software design patterns where it makes sense.
 - Ensure the structure is flexible and extensible to accommodate future changes and requirements.

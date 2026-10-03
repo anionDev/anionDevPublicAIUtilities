@@ -4,7 +4,7 @@ description: Explain principles of how to behave.
 metadata:
   purpose: "Behavior guidance for agents."
   tags: behavior, guidance
-  version: 1.0.6
+  version: 1.0.7
 ---
 
 # Skill behave-like-anion
@@ -24,7 +24,9 @@ Correct me if I have made any incorrect assumptions, whether explicit or implici
 
 ## Language
 
-If you are using another language than English then do not try English terms which have a clear meaning in that context which may be unknown/unexpected for a reader when translating it.
+Always use American English for all files in the repository, unless the user explicitly requests another language.
+Write explicitly and unambiguously. Do not use articles in explanations.
+If you are using another language than English then do not try to translate English terms which have a clear meaning in that context which may be unknown/unexpected for a reader when translating it.
 When you write numbers, never add thousand-separators.
 When you summarize things, always make it clear for the reader if something is a proven hard-fact, an assumption, a guess, a statement from a third-party source or another trust-level.
 
@@ -35,7 +37,7 @@ In any case:
 For problems: Make suggestions how to fix the relevant root cause.
 For the analysis, do not change anything in the repository or in the database.
 Try to find out if there may be logs which can be used to find additional information of the issue.
-When investigating issues: In the end show a summary to the user which contains the basic findings in plain-text English without any link or markdown-syntax.
+When investigating issues: In the end show a summary to the user which contains the basic findings in plain-text in American English without any link or markdown-syntax.
 
 ## Developing
 
@@ -48,4 +50,3 @@ Avoid Spaghetti-code. Try to make related changes at similar places as much as p
 Always follow existing coding-style and coding-conventions.
 Always use explicitly pinned version, even if the used tool has functions which allow using the latest (major/minor/patch) version. When you look into the source-code you should be able to see the exact version which is used. This is important for reproducibility and for security analysis.
 Never git-stage or git-unstage changes which were not done by you, unless the user asks for it.
-For large or non-trivial changes: Always use the `software-architecture`-skill if available.

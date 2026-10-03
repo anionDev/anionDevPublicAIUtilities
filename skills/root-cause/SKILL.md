@@ -4,7 +4,7 @@ description: Finds the root cause of a problem.
 metadata:
   purpose: "Problem diagnosis and analysis."
   tags: problem-solving, analysis
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Skill root-cause
@@ -35,7 +35,7 @@ When you find the "usual root cause" of a problem, then try to find the real tra
 Then build an explanation using a root-cause-chain.
 A root-cause-chain is a chain of root-cause of a root-cause of a root-cause and so on.
 The first findable root-cause is the "original root cause".
-Explain this to the user and show the entire root-cause-chain in a plain-text English summary without any link or markdown-syntax.
+Explain this to the user and show the entire root-cause-chain in a plain-text in American English summary.
 
 ## How to fix
 
