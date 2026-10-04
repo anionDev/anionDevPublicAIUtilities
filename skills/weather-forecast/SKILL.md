@@ -51,6 +51,7 @@ metadata:
    - `weathercode` — used to derive the sunny/overcast/variable condition (see step 5)
 
    Example call (via terminal):
+
    ```bash
    curl -s "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,rain_sum,snowfall_sum,weathercode&timezone=auto&forecast_days=2"
    ```

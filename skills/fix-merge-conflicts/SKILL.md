@@ -9,10 +9,10 @@ metadata:
 
 # Fix Merge Conflicts
 
-Resolves conflicts that arise from `git merge`, `git rebase`, `git cherry-pick`, `git revert`,
-`git stash pop` or `git am`. The guiding principle: **a conflict is a question about intent, not
-about text.** Both sides changed the same region because both sides wanted something. The
-resolution must preserve both intents, or explicitly and knowingly drop one of them.
+Resolves conflicts that arise from `git merge`, `git rebase`, `git cherry-pick`, `git revert`, `git stash pop` or `git am`.
+The guiding principle: **a conflict is a question about intent, not about text.**
+Both sides changed the same region because both sides wanted something.
+The resolution must preserve both intents, or explicitly and knowingly drop one of them.
 
 Never resolve a conflict by picking whichever side makes the markers disappear fastest.
 
@@ -26,8 +26,8 @@ The task is done when:
 3. Every non-obvious resolution decision — especially every place where one side's change was
    intentionally dropped — has been reported to the user.
 
-The merge/rebase is **not** finalized (no `git commit`, no `git rebase --continue`, no
-`git push`) unless the user explicitly asks for it. See "Non-goals".
+The merge/rebase is **not** finalized (no `git commit`, no `git rebase --continue`, no `git push`) unless the user explicitly asks for it.
+See "Non-goals".
 
 ## Step 0 — Never destroy the user's work
 
@@ -61,19 +61,19 @@ Rules:
 
 ## Step 1 — Determine which operation is in progress
 
-The correct interpretation of "ours" and "theirs" depends entirely on the operation, and this is
-the single most frequent source of wrong resolutions:
+The correct interpretation of "ours" and "theirs" depends entirely on the operation, and this is the single most frequent source of wrong resolutions:
 
-| Operation | `--ours` / `HEAD` / left marker side | `--theirs` / right marker side |
-|---|---|---|
-| `git merge feature` (on `main`) | `main` — the branch you are on | `feature` — the branch being merged in |
+| Operation                              | `--ours` / `HEAD` / left marker side      | `--theirs` / right marker side                  |
+| -------------------------------------- | ----------------------------------------- | ----------------------------------------------- |
+| `git merge feature` (on `main`)        | `main` — the branch you are on            | `feature` — the branch being merged in          |
 | `git rebase main` (rebasing `feature`) | **`main`** — the upstream you replay onto | **`feature`** — your own commits being replayed |
-| `git cherry-pick <c>` | the current branch | the cherry-picked commit |
-| `git revert <c>` | the current branch | the inverse of the reverted commit |
-| `git stash pop` | the working tree | the stashed changes |
+| `git cherry-pick <c>`                  | the current branch                        | the cherry-picked commit                        |
+| `git revert <c>`                       | the current branch                        | the inverse of the reverted commit              |
+| `git stash pop`                        | the working tree                          | the stashed changes                             |
 
-**During a rebase, "ours" and "theirs" are inverted relative to intuition.** "Theirs" is your own
-work. Verify with:
+**During a rebase, "ours" and "theirs" are inverted relative to intuition.**
+"Theirs" is your own work.
+Verify with:
 
 ```bash
 ls .git/MERGE_HEAD .git/rebase-merge .git/rebase-apply .git/CHERRY_PICK_HEAD 2>/dev/null
@@ -138,17 +138,15 @@ For each real source conflict, answer three questions before writing a single li
    unrelated reasons. Then the resolution is trivially "both". A conflict is only genuinely hard
    when both sides changed the *same behavior*.
 
-Enable `diff3`/`zdiff3` style to see the base inline — it turns most "impossible" conflicts into
-obvious ones:
+Enable `diff3`/`zdiff3` style to see the base inline — it turns most "impossible" conflicts into obvious ones:
 
 ```bash
 git config merge.conflictStyle zdiff3
 git checkout --conflict=zdiff3 -- <file>   # re-materialize the conflict with base included
 ```
 
-The second command is path-scoped (`-- <file>`) and only rewrites that one still-unresolved file
-from its stages — it does not check out a commit and does not move HEAD. Run it only on files
-whose conflict has not been edited yet, since it discards manual edits in that file.
+The second command is path-scoped (`-- <file>`) and only rewrites that one still-unresolved file from its stages — it does not check out a commit and does not move HEAD.
+Run it only on files whose conflict has not been edited yet, since it discards manual edits in that file.
 
 ## Step 4 — Resolve by intent, using the decision order
 
@@ -180,8 +178,9 @@ Additional rules while resolving:
 
 ## Step 5 — Look beyond the conflict markers (semantic conflicts)
 
-A conflict-marker-free file is **not** a merged file. Git only detects textual overlap. The most
-dangerous merge damage is where git merged cleanly but the result is wrong:
+A conflict-marker-free file is **not** a merged file.
+Git only detects textual overlap.
+The most dangerous merge damage is where git merged cleanly but the result is wrong:
 
 - Side A renamed a symbol; side B added new usages of the old name in a different file → clean
   merge, broken build.
@@ -191,8 +190,8 @@ dangerous merge damage is where git merged cleanly but the result is wrong:
 - Both sides added a database migration with the same parent — clean merge, broken migration chain.
 - Both sides bumped the same dependency to different versions in different files.
 
-After resolving markers, actively grep for the symbols touched by both sides across the *whole*
-repository, not only the conflicted files. Then rely on the build (Step 8) as the second net.
+After resolving markers, actively grep for the symbols touched by both sides across the *whole* repository, not only the conflicted files.
+Then rely on the build (Step 8) as the second net.
 
 ## Step 6 — Use git's own machinery where it helps
 
@@ -215,20 +214,16 @@ git grep -nE '^(<{7}|={7}|>{7})( |$)'          # must find nothing (also checks 
 git status --short
 ```
 
-The `git grep` is mandatory: conflict markers routinely get committed inside strings, tests,
-documentation or files that were resolved by hand earlier in the session.
+The `git grep` is mandatory: conflict markers routinely get committed inside strings, tests, documentation or files that were resolved by hand earlier in the session.
 
-Then stage the resolved files explicitly with `git add <file>` — per file, never `git add -A`,
-so that unrelated working-tree changes are not swept into the merge.
+Then stage the resolved files explicitly with `git add <file>` — per file, never `git add -A`, so that unrelated working-tree changes are not swept into the merge.
 
 ## Step 8 — Build and test before declaring success
 
-Run the repository's own build and test commands (the ones the project defines — see the
-`work-with-common-project-structure` skill for repositories following the common project
-structure). A merge resolution that was not compiled and tested is unverified.
+Run the repository's own build and test commands (the ones the project defines — see the `work-with-common-project-structure` skill for repositories following the common project structure).
+A merge resolution that was not compiled and tested is unverified.
 
-If the build fails, treat the failure as part of this task — it is almost always a Step 5 semantic
-conflict, not an unrelated problem.
+If the build fails, treat the failure as part of this task — it is almost always a Step 5 semantic conflict, not an unrelated problem.
 
 ## Step 9 — Report
 

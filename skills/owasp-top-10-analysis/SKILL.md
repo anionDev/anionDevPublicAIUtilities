@@ -6,9 +6,11 @@ metadata:
   tags: analysis, security
   version: 1.0.0
 ---
+
 Perform a repository security analysis focused on the OWASP Top 10.
 Before starting the analysis, research the latest official OWASP Top 10 list/version and use that as the baseline for all findings.
 Use this structured workflow:
+
 1. Scope and attack surface discovery:
 - Identify components with real external attack surface first (for example: public HTTP endpoints, API gateways, auth flows, admin interfaces, file upload paths, webhook handlers, message consumers, third-party integration points, CI/CD and deployment entry points).
 - Mark each component as internet-exposed, internal-only, or local-only.
@@ -29,9 +31,12 @@ Use this structured workflow:
 - Mention missing security tests for high-risk paths.
 - Mention useful secure defaults and hardening opportunities.
 - If a category has no findings, state that explicitly.
+
 Output requirements:
+
 - Structure the result by OWASP category.
 - For each finding provide: title, affected component, attack surface, risk, evidence, impact, and recommendation.
 - End with a short prioritized remediation plan.
 - End with a summary table of all findings including at least: finding ID, OWASP category, affected component, criticality, confidence, and status (open/mitigated/needs-validation).
+
 Do not actually change any file unless the user explicitly asks for fixes.

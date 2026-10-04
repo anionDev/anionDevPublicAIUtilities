@@ -10,25 +10,31 @@ metadata:
 # Skill fix-dotnet-nullcheck-warnings
 
 ## Goal
+
 Fixes nullable and NullReference warnings in C# projects systematically and in a technically correct way.
 
 ## When to use
+
 - When warnings like `CS8600` to `CS8777` occur during the build.
 - When a user explicitly wants to "fix NullReference warnings".
 - When nullable annotations are inconsistent and lead to potential runtime `NullReferenceException`s.
 
 ## Core principle
+
 First determine all warnings completely, then decide per warning on a technical basis:
+
 1. Can `null` actually occur from a domain point of view?
 2. If yes: model nullability correctly (`?`) and ensure null-safe usage.
 3. If no: tighten the API/types so that `null` is no longer possible (remove nullability, add guards), without introducing errors.
 
 ## Inputs
+
 - Path to the solution or the project.
 - Current compiler warnings (build output).
 - Domain rules on whether a value is actually optional.
 
 ## Workflow
+
 1. Collect nullable warnings
 - Run the build with warnings (e.g. `dotnet build`).
 - Extract the relevant warnings from the build output.
@@ -57,12 +63,14 @@ First determine all warnings completely, then decide per warning on a technical 
 - Optionally run tests and check for regressions.
 
 ## Decision rules
+
 - Prefer tightening the model over "silencing the warning".
 - `!` (null-forgiving operator) only as a last resort and only with a clear invariant.
 - Changes must respect API contracts; be especially careful with public APIs.
 - With multiple possible fixes: choose the one with the least domain ambiguity.
 
 ## Typical fix patterns
+
 - Secure dereferencing:
 	- Before: `value.Length`
 	- After: null check or safe alternative (`value?.Length`, if technically correct)
@@ -76,11 +84,13 @@ First determine all warnings completely, then decide per warning on a technical 
 	- If not, adjust the implementation so that `null` is never returned.
 
 ## Anti-patterns
+
 - Setting `#nullable disable` across the board.
 - Suppressing warnings instead of fixing the cause.
 - Blindly adding `?` everywhere even though non-null holds from a domain point of view.
 
 ## Short checklist for the agent
+
 - Warnings pulled from the build?
 - Checked against the Microsoft reference?
 - Decided per location on a technical basis: allow or remove nullability?

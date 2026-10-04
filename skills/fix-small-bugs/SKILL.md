@@ -9,4 +9,5 @@ metadata:
 
 # Skill fix-bugs
 
-Use the `fix-small-bug` skill to fix small bugs in the repository but do not finish after the first bug is fixed. Instead, continue to find and fix more small bugs until you have searched the entire codebase.
+Use the `fix-small-bug` skill to fix small bugs in the repository but do not finish after the first bug is fixed.
+Instead, continue to find and fix more small bugs until you have searched the entire codebase.

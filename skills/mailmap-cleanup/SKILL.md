@@ -9,17 +9,12 @@ metadata:
 
 # Git `.mailmap` Cleanup
 
-Consolidates the many raw author identities that accumulate in a repository's git history (typo'd
-email domains, GitHub noreply addresses, AD/Windows usernames, mixed-case duplicates, "Lastname,
-Firstname" formatting) into one canonical `Name <email>` per real person, via a `.mailmap` file at
-the repository root.
+Consolidates the many raw author identities that accumulate in a repository's git history (typo'd email domains, GitHub noreply addresses, AD/Windows usernames, mixed-case duplicates, "Lastname, Firstname" formatting) into one canonical `Name <email>` per real person, via a `.mailmap` file at the repository root.
 
 ## Completion criterion
 
-A first draft is done when every distinct identity in `git log --format='%aN|%aE' | sort -u` has
-either been merged into a canonical identity, or deliberately left unmapped because no confident
-identity resolution was possible. The task is fully done only after the user has reviewed and
-confirmed the uncertain merges (see Step 4).
+A first draft is done when every distinct identity in `git log --format='%aN|%aE' | sort -u` has either been merged into a canonical identity, or deliberately left unmapped because no confident identity resolution was possible.
+The task is fully done only after the user has reviewed and confirmed the uncertain merges (see Step 4).
 
 ## Step 1 — Gather the raw identity list
 
@@ -27,7 +22,8 @@ confirmed the uncertain merges (see Step 4).
 git log --format='%aN|%aE' | sort -u
 ```
 
-This is the ground truth. Re-run it after every batch of edits — see Step 5.
+This is the ground truth.
+Re-run it after every batch of edits — see Step 5.
 
 ## Step 2 — Establish the canonical rules with the user
 
@@ -57,20 +53,16 @@ Typical questions to clarify upfront:
 
 ## Step 3 — Know the `.mailmap` line formats
 
-| Format | Syntax | Effect |
-|---|---|---|
-| 1 | `Proper Name <commit-email>` | Rewrites only the **name** for any commit using that email (email match is case-insensitive). Does **not** change the email's casing in output. |
-| 2 | `<proper-email> <commit-email>` | Rewrites only the **email**, keeps the original commit name. |
-| 3 | `Proper Name <proper-email> <commit-email>` | Rewrites **both** name and email for any commit matching `commit-email`. This is the only form that forces a canonical (e.g. lowercase) email to appear in output. |
-| 4 | `Proper Name <proper-email> Commit Name <commit-email>` | Most specific: matches only when **both** the commit's name and email match. Rarely needed — use only when the same email is shared by genuinely different people and the name is the only disambiguator. |
+| Format | Syntax                                                  | Effect                                                                                                                                                                                                    |
+| ------ | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1      | `Proper Name <commit-email>`                            | Rewrites only the **name** for any commit using that email (email match is case-insensitive). Does **not** change the email's casing in output.                                                           |
+| 2      | `<proper-email> <commit-email>`                         | Rewrites only the **email**, keeps the original commit name.                                                                                                                                              |
+| 3      | `Proper Name <proper-email> <commit-email>`             | Rewrites **both** name and email for any commit matching `commit-email`. This is the only form that forces a canonical (e.g. lowercase) email to appear in output.                                        |
+| 4      | `Proper Name <proper-email> Commit Name <commit-email>` | Most specific: matches only when **both** the commit's name and email match. Rarely needed — use only when the same email is shared by genuinely different people and the name is the only disambiguator. |
 
-**Critical gotcha (lesson learned)**: git's mailmap email matching is case-insensitive, but a
-format-1 rule (name-only) does **not** normalize the email's casing in output — it only fixes the
-displayed name. If the raw history contains a mixed-case variant of an otherwise-correct email
-(e.g. `John.Doe@example.com` vs `john.doe@example.com`), a format-1 rule alone leaves the mixed-case
-variant as a separate line in `git log` output. Fix this by adding an explicit format-3 redirect
-line (`Proper Name <canonical-lowercase-email> <Mixed.Case.Variant@example.com>`) for every
-case-variant found.
+**Critical gotcha (lesson learned)**: git's mailmap email matching is case-insensitive, but a format-1 rule (name-only) does **not** normalize the email's casing in output — it only fixes the displayed name.
+If the raw history contains a mixed-case variant of an otherwise-correct email (e.g. `John.Doe@example.com` vs `john.doe@example.com`), a format-1 rule alone leaves the mixed-case variant as a separate line in `git log` output.
+Fix this by adding an explicit format-3 redirect line (`Proper Name <canonical-lowercase-email> <Mixed.Case.Variant@example.com>`) for every case-variant found.
 
 ## Step 4 — Build the draft, separating confident merges from guesses
 
@@ -90,9 +82,7 @@ For each raw identity:
 5. Never fabricate a name for a raw identity that carries no name evidence at all; leave it out of
    the mailmap and flag it as unresolved instead.
 
-Apply confirmed corrections one at a time as the user reports them (this is typically an iterative,
-interactive process — the user may independently check `git log --author="<raw-identity>"`
-themselves and report back the real name).
+Apply confirmed corrections one at a time as the user reports them (this is typically an iterative, interactive process — the user may independently check `git log --author="<raw-identity>"` themselves and report back the real name).
 
 ## Step 5 — Re-verify after every batch of edits
 
@@ -108,8 +98,7 @@ and check that:
 - No canonical email appears twice in different casing (the Step 3 gotcha).
 - The remaining unmapped/flagged identities are exactly the ones still pending user confirmation.
 
-Report the before/after counts concisely (e.g. "41 → 39 unique identities") rather than dumping
-the full list, unless the user asks for detail.
+Report the before/after counts concisely (e.g. "41 → 39 unique identities") rather than dumping the full list, unless the user asks for detail.
 
 ## Non-goals
 

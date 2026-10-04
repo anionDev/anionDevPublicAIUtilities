@@ -9,8 +9,7 @@ metadata:
 
 # Repository Technical-Debt Analysis
 
-Produces a prioritized inventory of the technical debt of a repository, together with an estimate
-of what each item costs and what removing it costs.
+Produces a prioritized inventory of the technical debt of a repository, together with an estimate of what each item costs and what removing it costs.
 
 Two principles drive everything below:
 
@@ -21,8 +20,7 @@ Two principles drive everything below:
 2. **A finding without evidence is an opinion.** Every finding names a concrete location, shows
    what is actually there, and states why it costs something. "Could be cleaner" is not a finding.
 
-This skill is **read-only**: it produces a report, it does not modify, fix, refactor or reformat
-anything (see "Non-goals").
+This skill is **read-only**: it produces a report, it does not modify, fix, refactor or reformat anything (see "Non-goals").
 
 ## Completion criterion
 
@@ -37,20 +35,19 @@ The analysis is complete when:
 
 ## Step 0 — Delimit against the neighbouring skills
 
-Technical debt is a broad term. Do **not** duplicate work that other skills own, but do reference
-their subject areas as debt items when they are relevant:
+Technical debt is a broad term.
+Do **not** duplicate work that other skills own, but do reference their subject areas as debt items when they are relevant:
 
-| Concern | Owning skill | Treatment here |
-|---|---|---|
-| Security weaknesses, OWASP categories, CVEs, exploitable bugs | `owasp-top-10-analysis`, `security-audit`, `bug-hunter`, `analyze-cve-finding` | Only note *structural* security debt (e.g. "no input-validation layer exists at all", "secrets handling is ad-hoc per module") and refer to those skills for the actual security analysis. |
-| Typos, formatting, lint-rule violations | `project-linting` | Report only if the repository has **no** linting setup at all, or if the setup exists but is not enforced. Do not list individual lint findings. |
-| Missing unit tests | `write-tests` | Report test-coverage debt as a structural finding (which critical areas are untested), not as a list of individual missing tests. |
-| Missing/outdated documentation | `write-documentation` | Report documentation debt where it blocks maintenance (undocumented architecture, dead README instructions), not stylistic doc issues. |
-| Deviation from the repository conventions | `work-with-common-project-structure` | If the repository follows the "common project structure", check it against those conventions and report deviations as structural debt. |
-| Deviation from the project's specifications | `specification-verification` | Use the `specification-verification`-skill to check whether all specifications (for example specifications managed by openspec) are implemented correctly, if the project has any. Every deviation from the specifications is technical debt and must be reported as a finding here. |
+| Concern                                                       | Owning skill                                                                   | Treatment here                                                                                                                                                                                                                                                                       |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Security weaknesses, OWASP categories, CVEs, exploitable bugs | `owasp-top-10-analysis`, `security-audit`, `bug-hunter`, `analyze-cve-finding` | Only note *structural* security debt (e.g. "no input-validation layer exists at all", "secrets handling is ad-hoc per module") and refer to those skills for the actual security analysis.                                                                                           |
+| Typos, formatting, lint-rule violations                       | `project-linting`                                                              | Report only if the repository has **no** linting setup at all, or if the setup exists but is not enforced. Do not list individual lint findings.                                                                                                                                     |
+| Missing unit tests                                            | `write-tests`                                                                  | Report test-coverage debt as a structural finding (which critical areas are untested), not as a list of individual missing tests.                                                                                                                                                    |
+| Missing/outdated documentation                                | `write-documentation`                                                          | Report documentation debt where it blocks maintenance (undocumented architecture, dead README instructions), not stylistic doc issues.                                                                                                                                               |
+| Deviation from the repository conventions                     | `work-with-common-project-structure`                                           | If the repository follows the "common project structure", check it against those conventions and report deviations as structural debt.                                                                                                                                               |
+| Deviation from the project's specifications                   | `specification-verification`                                                   | Use the `specification-verification`-skill to check whether all specifications (for example specifications managed by openspec) are implemented correctly, if the project has any. Every deviation from the specifications is technical debt and must be reported as a finding here. |
 
-Everything else — code smells, duplication, architectural erosion, dependency rot, build/CI debt,
-process debt — is this skill's own subject.
+Everything else — code smells, duplication, architectural erosion, dependency rot, build/CI debt, process debt — is this skill's own subject.
 
 ## Step 1 — Establish the scope, and exclude what must be excluded
 
@@ -71,17 +68,16 @@ Exclude from the analysis (but state that you excluded them):
 - **Git-ignored and binary files.**
 - **Test fixtures and sample data**, unless the debt *is* the fixture management.
 
-Then get the shape of what remains: languages, code units/modules, entry points, build system, test
-projects, CI configuration. If the repository follows the common project structure, use that layout
-to name the components consistently in the report.
+Then get the shape of what remains: languages, code units/modules, entry points, build system, test projects, CI configuration.
+If the repository follows the common project structure, use that layout to name the components consistently in the report.
 
-State the scope explicitly at the top of the report. An analysis whose scope is unclear cannot be
-acted on.
+State the scope explicitly at the top of the report.
+An analysis whose scope is unclear cannot be acted on.
 
 ## Step 2 — Gather evidence from the history (hotspots)
 
-This step is what separates a useful debt report from a generic code review. Find where the
-repository actually hurts:
+This step is what separates a useful debt report from a generic code review.
+Find where the repository actually hurts:
 
 ```bash
 # Change frequency per file over the last year (the "interest rate")
@@ -97,12 +93,11 @@ git log --since=1.year --oneline --grep='fix\|bug\|hotfix\|workaround' -i
 git ls-files | xargs wc -l 2>/dev/null | sort -rn | head -30
 ```
 
-(On Windows, run these through the Bash tool, or use the PowerShell equivalents — the point is the
-data, not the exact command.)
+(On Windows, run these through the Bash tool, or use the PowerShell equivalents — the point is the data, not the exact command.)
 
-From this, derive the **hotspots**: files or modules that are simultaneously large/complex and
-frequently changed. These get the deepest analysis. Files that are large but frozen get a
-one-line mention at most.
+From this, derive the **hotspots**: files or modules that are simultaneously large/complex and frequently changed.
+These get the deepest analysis.
+Files that are large but frozen get a one-line mention at most.
 
 Also look for history smells:
 
@@ -176,8 +171,8 @@ Before reporting anything, apply this filter — it is the main source of false 
 - Would the "fix" be a rewrite of a working, stable, rarely-touched component? Then the honest
   recommendation is usually "leave it alone".
 
-Debt that will never be paid back is not worth listing. Prefer a short report of real items over an
-exhaustive one nobody will act on.
+Debt that will never be paid back is not worth listing.
+Prefer a short report of real items over an exhaustive one nobody will act on.
 
 ## Step 5 — Rate and prioritize
 
@@ -191,9 +186,8 @@ For each finding, determine:
 - **Confidence**: Confirmed (evidence in the code) / Likely / Assumption (needs the user's domain
   knowledge to verify). Never present an assumption as a fact.
 
-Prioritize primarily by **impact ÷ effort**, and pull forward anything that blocks other work
-(e.g. "no test harness exists" blocks every other refactoring, so it comes first regardless of its
-own score). Explicitly name the items that are *not* worth fixing.
+Prioritize primarily by **impact ÷ effort**, and pull forward anything that blocks other work (e.g. "no test harness exists" blocks every other refactoring, so it comes first regardless of its own score).
+Explicitly name the items that are *not* worth fixing.
 
 ## Step 6 — Report
 
@@ -213,7 +207,8 @@ Deliver:
 7. **Summary table** of all findings with at least: ID, category, location, impact, effort,
    confidence.
 
-Keep the prose tight. The report is a work list, not an essay.
+Keep the prose tight.
+The report is a work list, not an essay.
 
 ## Non-goals
 

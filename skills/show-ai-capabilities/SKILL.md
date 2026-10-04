@@ -6,7 +6,9 @@ metadata:
   tags: information, ai-self-test
   version: 1.0.1
 ---
+
 Just print the following information and do nothing more than that:
+
 - Your current working directory.
 - The current AI model being used.
 - The current AI model's version.

@@ -11,18 +11,15 @@ metadata:
 
 ## Goal
 
-Produce **one single copy-pasteable block** which contains everything a fresh AI-session needs to
-continue the current work as if it had been there from the beginning: what the task is, what was
-decided and why, what is already done, what was learned about this codebase, which commands work,
-which permissions and tools were used, and what the next steps are.
+Produce **one single copy-pasteable block** which contains everything a fresh AI-session needs to continue the current work as if it had been there from the beginning: what the task is, what was decided and why, what is already done, what was learned about this codebase, which commands work, which permissions and tools were used, and what the next steps are.
 
-The block is the deliverable. It is not a summary for the user to read — it is an artifact for
-another agent to consume via the `ai-session-restore`-skill. Optimize it for that.
+The block is the deliverable.
+It is not a summary for the user to read — it is an artifact for another agent to consume via the `ai-session-restore`-skill.
+Optimize it for that.
 
 ## When to use
 
-- The user wants to end a session (the context gets long, the day is over, the tool is restarted)
-  and continue later without losing the accumulated context.
+- The user wants to end a session (the context gets long, the day is over, the tool is restarted) and continue later without losing the accumulated context.
 - The user wants to hand the work over to another session, another machine or another person.
 
 ## Workflow
@@ -32,61 +29,52 @@ another agent to consume via the `ai-session-restore`-skill. Optimize it for tha
 Go through the whole conversation of the current session and collect:
 
 - The task the user actually asked for, in their words, including scope-corrections made later.
-- Every decision that was made, together with its reason. A decision without its reason is useless
-  for the next session, because it will simply be re-litigated there.
-- Everything that was learned about the codebase which is **not** obvious from reading the code:
-  quirks, traps, things that look wrong but are intentional, dependencies between components.
-- Every approach that was tried and rejected, and why. This keeps the next session out of the same
-  dead end.
+- Every decision that was made, together with its reason. A decision without its reason is useless for the next session, because it will simply be re-litigated there.
+- Everything that was learned about the codebase which is **not** obvious from reading the code: quirks, traps, things that look wrong but are intentional, dependencies between components.
+- Every approach that was tried and rejected, and why. This keeps the next session out of the same dead end.
 - The state of the work: what is finished and verified, what is half-done, what is untouched.
-- Preferences and corrections the user gave about *how* to work (language, style, verbosity, which
-  tools to use or to avoid).
+- Preferences and corrections the user gave about *how* to work (language, style, verbosity, which tools to use or to avoid).
 
 ### 2. Collect the verifiable environment-facts
 
 Read these from the system, not from memory:
 
-- Repository, current branch, current commit (`git rev-parse HEAD`) and whether the working tree is
-  clean (`git status --porcelain`).
-- The build-, test- and run-commands which were actually executed successfully in this session,
-  verbatim. Never write a command into the export which was not verified — a wrong command costs the
-  next session more time than a missing one.
+- Repository, current branch, current commit (`git rev-parse HEAD`) and whether the working tree is clean (`git status --porcelain`).
+- The build-, test- and run-commands which were actually executed successfully in this session, verbatim. Never write a command into the export which was not verified — a wrong command costs the next session more time than a missing one.
 - The relevant files, with their paths and one line each about why they matter.
 
 ### 3. Collect tooling and permissions
 
-The next session does not inherit the runtime-permissions of this one. Record therefore:
+The next session does not inherit the runtime-permissions of this one.
+Record therefore:
 
 - Which skills were used, and in which order.
 - Which tools and MCP-servers were used.
 - Which concrete commands or tool-calls the user approved during this session.
 - Which additional working-directories outside the primary one were accessed.
-- Which permission-requests the user **denied**, and what was done instead. This is as important as
-  the granted ones.
+- Which permission-requests the user **denied**, and what was done instead. This is as important as the granted ones.
 
-State in the export that these are *records*, not grants: a permission approved in this session must
-be approved again in the new one, unless it is persisted in the settings.
+State in the export that these are *records*, not grants: a permission approved in this session must be approved again in the new one, unless it is persisted in the settings.
 
 ### 4. Redact
 
 Never put into the export:
 
-- Secrets, tokens, passwords, private keys, connection-strings with credentials, or content from a
-  `SensitiveInformation`-folder.
+- Secrets, tokens, passwords, private keys, connection-strings with credentials, or content from a `SensitiveInformation`-folder.
 - Personal data which is not needed to continue the work.
 - Large code-dumps. Reference files by path and line instead — the new session can read them itself.
 
-If a secret is relevant for the work, write only *that* it is needed and *where* it comes from
-(e.g. "the API-key is read from the environment-variable X"), never its value.
+If a secret is relevant for the work, write only *that* it is needed and *where* it comes from (e.g. "the API-key is read from the environment-variable X"), never its value.
 
 ### 5. Write the export
 
-Print the export as one fenced block, fenced with **four** backticks so that inner code-fences
-survive the copy-pasting. Print nothing between the fences except the export itself. Always add a timestamp and a proper title to the export.
+Print the export as one fenced block, fenced with **four** backticks so that inner code-fences survive the copy-pasting.
+Print nothing between the fences except the export itself.
+Always add a timestamp and a proper title to the export.
 
 Use exactly this structure and keep the headings unchanged — `ai-session-restore` relies on them:
 
-````
+````text
 # AI-Session-Export
 
 - Format-version: 1
@@ -152,47 +140,35 @@ Only verified ones.>
 do, corrections they gave.>
 ````
 
-Leave out a section only if it is genuinely empty, and then write `- none` under its heading instead
-of deleting the heading.
+Leave out a section only if it is genuinely empty, and then write `- none` under its heading instead of deleting the heading.
 
 ### 6. Persist the export
 
-Always write the export into a file as well — the printed block alone is lost as soon as the
-terminal-history is gone.
+Always write the export into a file as well — the printed block alone is lost as soon as the terminal-history is gone.
 
 Determine the target-path:
 
 - If the user named a file, use exactly that path.
-- If the user named **no** file, use the default path
-  `<repo>/.notes/ai-session-<yyyy-MM-dd>.txt` if the folder `<repo>/.notes` exists, where `<repo>` is the root of the git-repository
-  (`git rev-parse --show-toplevel`) and `<yyyy-MM-dd>` is today's date.
-- If the primary working-directory is not inside a git-repository, use
-  `<primary-working-directory>/.notes/ai-session-<yyyy-MM-dd>.txt` instead if  `<primary-working-directory>/.notes` exists.
+- If the user named **no** file, use the default path `<repo>/.notes/ai-session-<yyyy-MM-dd>.txt` if the folder `<repo>/.notes` exists, where `<repo>` is the root of the git-repository (`git rev-parse --show-toplevel`) and `<yyyy-MM-dd>` is today's date.
+- If the primary working-directory is not inside a git-repository, use `<primary-working-directory>/.notes/ai-session-<yyyy-MM-dd>.txt` instead if  `<primary-working-directory>/.notes` exists.
 - If the default-location does not exist, ask the user for a file-path to write to. Do **not** try to create a `.notes`-folder in a random location.
 
 Then:
 
 - Create the `.notes`-folder if it does not exist yet.
-- Never overwrite an existing export. If a file with that name already exists (because a session was
-  already saved on the same day), write `ai-session-<yyyy-MM-dd>-2.txt`, then `-3.txt`, and so on.
-- Check whether `.notes/` is git-ignored (`git check-ignore -q .notes`). If it is not, add a
-  `.notes/`-entry to the `.gitignore` of the repository and tell the user in one line that you did
-  so. An export contains project-internals and must not be committed.
-- Write the file-content without the surrounding four-backtick-fence: the file starts with the line
-  `# AI-Session-Export`.
+- Never overwrite an existing export. If a file with that name already exists (because a session was already saved on the same day), write `ai-session-<yyyy-MM-dd>-2.txt`, then `-3.txt`, and so on.
+- Check whether `.notes/` is git-ignored (`git check-ignore -q .notes`). If it is not, add a `.notes/`-entry to the `.gitignore` of the repository and tell the user in one line that you did so. An export contains project-internals and must not be committed.
+- Write the file-content without the surrounding four-backtick-fence: the file starts with the line `# AI-Session-Export`.
 - Tell the user the path of the written file, so that it can be passed to `ai-session-restore`.
 
 ## Rules
 
 - The export must be self-contained. Assume the next session has read nothing of this conversation.
-- Write facts, not impressions. Every claim must be traceable to something which happened in this
-  session or to a command whose output you saw.
+- Write facts, not impressions. Every claim must be traceable to something which happened in this session or to a command whose output you saw.
 - Mark uncertainty as uncertainty. `<assumed>` is fine, silently guessing is not.
-- Do not invent progress. What was not verified belongs under "In progress", not under
-  "Done and verified".
+- Do not invent progress. What was not verified belongs under "In progress", not under "Done and verified".
 - Do not shorten to save space at the cost of the reason behind a decision.
-- Print the block in one piece, without interleaved commentary, so that the user can select it in
-  one go.
+- Print the block in one piece, without interleaved commentary, so that the user can select it in one go.
 
 ## Checklist for the agent
 
@@ -203,6 +179,5 @@ Then:
 - Are dead ends and denied permissions recorded, not only the successes?
 - Are secrets and personal data excluded?
 - Is the structure exactly the one above, so that `ai-session-restore` can read it?
-- Was the export written to a file, no existing export overwritten, and the path told to the
-  user?
+- Was the export written to a file, no existing export overwritten, and the path told to the user?
 - Is the folder containing the export git-ignored?

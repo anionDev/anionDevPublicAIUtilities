@@ -10,6 +10,7 @@ metadata:
 # Skill software-architecture
 
 The structure of the software must always follow the following principles:
+
 - Have a sensible and clear structure which is easy to understand for humans.
 - Have a clear separation of concerns and responsibilities. Consider the hexagonal-architecture-principles for this.
 - Have a clear and well-defined interface between the different components.

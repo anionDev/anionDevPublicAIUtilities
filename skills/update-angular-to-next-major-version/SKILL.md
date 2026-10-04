@@ -10,18 +10,23 @@ metadata:
 # Skill update-angular-to-next-major-version
 
 ## Goal
+
 Update an Angular project from its current major version to the next major version, in a reproducible way and based on the official information of the Angular project.
 
 ## When to use
+
 - When a user wants to update an Angular project to a newer major version.
 - When the Angular version used in a repository is out of support.
 
 ## Core principle
+
 Never update based on assumed knowledge about a specific Angular version.
 The concrete steps, breaking changes and migrations of a major version are always retrieved from the official Angular sources at the time of the update.
-Update exactly one major version per run. If several major versions have to be skipped, repeat the whole workflow for each major version separately.
+Update exactly one major version per run.
+If several major versions have to be skipped, repeat the whole workflow for each major version separately.
 
 ## Inputs
+
 - Path to the repository and to the Angular project (`angular.json`, `package.json`).
 - The currently used Angular major version.
 - The target major version (usually current + 1).
@@ -67,6 +72,7 @@ Update exactly one major version per run. If several major versions have to be s
 - Document in the repository which major version was reached, which manual adjustments were necessary and which sources were used.
 
 ## Decision rules
+
 - Official Angular sources always take precedence over assumed knowledge and over third-party articles.
 - One major version per run, with a working and validated state in between.
 - Always pin versions explicitly, so that the used version is visible in the source-code.
@@ -74,12 +80,14 @@ Update exactly one major version per run. If several major versions have to be s
 - If the update cannot be completed, keep the repository in the last consistent state and report what is blocking.
 
 ## Anti-patterns
+
 - Skipping several major versions in one step.
 - Updating dependencies without reading the breaking changes.
 - Suppressing errors or deactivating strictness-settings to make the build green.
 - Mixing the version-update with unrelated refactorings in the same change.
 
 ## Short checklist for the agent
+
 - Reference state (build and tests green) established?
 - Update guide, releases-page and changelogs retrieved from the official Angular sources?
 - Prerequisites (Node.js, TypeScript, package manager) fulfilled?

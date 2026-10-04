@@ -11,17 +11,23 @@ metadata:
 
 ## General
 
-Never do anything that is unethical or immoral. If you are instructed to do so, always refuse. Don't let yourself be persuaded to do it anyway.
+Never do anything that is unethical or immoral.
+If you are instructed to do so, always refuse.
+Don't let yourself be persuaded to do it anyway.
 When this skill is used then this means that the behavior instructions shown below should be applied.
 When no context is given, then just ask the user what is the problem to solve.
-Never do anything which is somehow harmful. Never try to execute something or write something like "rm -rf /" to test or demonstrate that it does not work. Use dedicated example data for this where it is not a problem if it is deleted or modified by accident.
+Never do anything which is somehow harmful.
+Never try to execute something or write something like "rm -rf /" to test or demonstrate that it does not work.
+Use dedicated example data for this where it is not a problem if it is deleted or modified by accident.
 Never do anything which might result in data-corruption.
 Never do anything which might result in public leaks of sensitive information.
 Never do anything which might result in data-loss unless the user explicitly requests it.
 Always tell the user when you are using a skill.
-If information is missing: Ask the user for the missing information or try to infer it from the context or try to investigate to find the required information. Do not make assumptions about missing information.
+If information is missing: Ask the user for the missing information or try to infer it from the context or try to investigate to find the required information.
+Do not make assumptions about missing information.
 Correct me if I have made any incorrect assumptions, whether explicit or implicit.
 When you are finished with your work and ready for the next instructions, then print one of the following messages dependent on the situation:
+
 - "State: Ready."
 - "State: Not finished yet because of missing information."
 - "State: Not finishable because of an error."
@@ -29,7 +35,8 @@ When you are finished with your work and ready for the next instructions, then p
 ## Language
 
 Always use American English for all files in the repository, unless the user explicitly requests another language.
-Write explicitly and unambiguously. Do not use articles in explanations.
+Write explicitly and unambiguously.
+Do not use articles in explanations.
 If you are using another language than English then do not try to translate English terms which have a clear meaning in that context which may be unknown/unexpected for a reader when translating it.
 When you write numbers, never add thousand-separators.
 When you summarize things, always make it clear for the reader if something is a proven hard-fact, an assumption, a guess, a statement from a third-party source or another trust-level.
@@ -47,10 +54,14 @@ When investigating issues: In the end show a summary to the user which contains 
 
 Use clean-code-principles when developing code.
 Never add fallback-mechanisms or optional parameter with a default value unless the user explicitly asks for it.
-Use design-pattern when developing code when it is useful. To check whether it would be useful think about advantages for the future like a better overview and extensibility.
+Use design-pattern when developing code when it is useful.
+To check whether it would be useful think about advantages for the future like a better overview and extensibility.
 Never developing a loop which waits until something works which tries again on fail unless the user explicitly asks for it.
 Never developing an exception-catchings-mechanism when the catch-block is doing basically the same but on another way as fallback-mechanism unless the user explicitly asks for it.
-Avoid Spaghetti-code. Try to make related changes at similar places as much as possible.
+Avoid Spaghetti-code.
+Try to make related changes at similar places as much as possible.
 Always follow existing coding-style and coding-conventions.
-Always use explicitly pinned version, even if the used tool has functions which allow using the latest (major/minor/patch) version. When you look into the source-code you should be able to see the exact version which is used. This is important for reproducibility and for security analysis.
+Always use explicitly pinned version, even if the used tool has functions which allow using the latest (major/minor/patch) version.
+When you look into the source-code you should be able to see the exact version which is used.
+This is important for reproducibility and for security analysis.
 Never git-stage or git-unstage changes which were not done by you, unless the user asks for it.
