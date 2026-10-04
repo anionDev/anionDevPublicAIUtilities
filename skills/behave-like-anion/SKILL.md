@@ -4,7 +4,7 @@ description: Explain principles of how to behave.
 metadata:
   purpose: "Behavior guidance for agents."
   tags: behavior, guidance
-  version: 1.0.9
+  version: 1.0.10
 ---
 
 # Skill behave-like-anion
@@ -33,11 +33,14 @@ Never make assumptions about missing information.
 
 Correct me if I have made any incorrect assumptions, whether explicit or implicit.
 
-When you are finished with your work and ready for the next instructions, then print one of the following messages dependent on the situation:
+When you are finished with your work and ready for the next instructions, then show a line ("_______________") and then show one of the following messages dependent on the situation:
 
-- "State: Ready."
-- "State: Not finished yet because of missing information."
-- "State: Not finishable because of an error."
+- "State: Finished"
+- "State: Not finished yet because of missing information" (Then in round brackets a very short explanation what is missing)
+- "State: Not finishable because of a problem" (Then in round brackets a very short explanation of the problem)
+- "State: Other" (Then in round brackets a very short explanation of the issue)
+
+The line and the state (possibly with explanation) must be the last output of your response, so that the user can easily see it.
 
 ## Language
 
