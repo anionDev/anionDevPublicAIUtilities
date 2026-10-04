@@ -220,7 +220,7 @@ Then stage the resolved files explicitly with `git add <file>` — per file, nev
 
 ## Step 8 — Build and test before declaring success
 
-Run the repository's own build and test commands (the ones the project defines — see the `work-with-common-project-structure` skill for repositories following the common project structure).
+Run the repository's own build and test commands (the ones the project defines — see the `common-project-structure` skill for repositories following the common project structure).
 A merge resolution that was not compiled and tested is unverified.
 
 If the build fails, treat the failure as part of this task — it is almost always a Step 5 semantic conflict, not an unrelated problem.

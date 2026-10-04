@@ -1,10 +1,10 @@
 ---
-name: work-with-common-project-structure
+name: common-project-structure
 description: Contains information about the "common project structure" which defines build-script-paths, linting-script-paths, etc. and gives information about how to work with it.
 metadata:
   purpose: "Information about repository-conventions."
   tags: information, conventions
-  version: 1.0.2
+  version: 1.1.0
 ---
 
 # General
@@ -58,7 +58,7 @@ The update of the dependencies exists on two levels, and both of them are option
 The common project structure only defines **which** scripts must exist and **what** they must do, not **how** they are implemented.
 The usual implementation is the `ScriptCollection`-package (see https://github.com/anionDevelopment/ScriptCollection): in that case the scripts in the repository are only thin wrappers which delegate to ScriptCollection, so the actual logic is not duplicated in the repository.
 
-**If a repository does not only implement the common project structure but also implements it using ScriptCollection then all knowledge about the concrete automations is contained in the skill `automation-using-scriptcollection`** (see its section "Work with common-project-structure").
+**If a repository does not only implement the common project structure but also implements it using ScriptCollection then all knowledge about the concrete automations is contained in the skill `common-project-structure-using-scriptcollection`** (see its section "Work with common-project-structure").
 That skill describes how the codeunits are built (`scbuildcodeunits`), which tasks exist (`Taskfile.yml`, for example `task UpdateVisualRegressionBaselines` to regenerate the baseline-images of visual-regression-tests) and which further commandline-commands ScriptCollection provides.
 Consult that skill before running or changing anything automation-related in such a repository.
 
@@ -105,13 +105,13 @@ It can be read from defined files:
 - `remoteaddress`: the address of the remote-repository.
 - `requiredenvironmentvariables`: the names (not the values) of the environment-variables which must be set to build the product.
 
-Further defined sources are the `ReadMe.md`-files (product- and codeunit-level, including the development-state), `<codeunit>/Other/Reference/ReferenceContent/Hints.md` (requirements to run the scripts) and `HowToBuild.md`, and `GitVersion.yml` for the versioning.
+Further defined sources are the `ReadMe.md`-files (product- and codeunit-level, including the development-state), `<codeunit>/Other/Reference/ReferenceContent/Hints.md` (requirements to run the scripts) and `HowToBuild.md`.
 
 ## Build codeunits
 
 Building means running all scripts of all enabled codeunits (for building, linting, running the testcases, etc.) in the correct order regarding the dependencies between the codeunits.
 In repositories which implement the common project structure using ScriptCollection the pipeline-command for this is `scbuildcodeunits` (with the `-c`-switch it runs the scripts in a container which provides a standardized environment).
-The details and all further switches are described in the skill `automation-using-scriptcollection`.
+The details and all further switches are described in the skill `common-project-structure-using-scriptcollection`.
 If the pipeline-command exits with 0 then everything is fine.
 If it exits with a non-zero exit-code then there is an error and the output of the command should be checked for details.
 

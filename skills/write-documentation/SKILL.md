@@ -33,7 +33,7 @@ Done when:
 Before writing:
 
 - Inventory what exists: readme, reference folder, architecture/decision documents, changelog, contribution guide, doc-comments, generated API documentation, comments in configuration and build scripts.
-- **If the repository defines rules or scripts for documentation, follow them.** For repositories using the common project structure, documentation lives in the defined folders and the documentation build is part of `scbuildcodeunit` — see the `work-with-common-project-structure` skill.
+- **If the repository defines rules or scripts for documentation, follow them.** For repositories using the common project structure, documentation lives in the defined folders and the documentation build is part of `scbuildcodeunit` — see the `common-project-structure` skill.
 - Detect and keep the existing conventions: language (do not mix languages — match what the repository already uses), doc-comment style (XML-doc, JSDoc, docstrings), heading structure, terminology. If the repository maintains a domain model or glossary, use exactly its terms (see the `domain-modeling` skill).
 - Determine the audience per document: the readme is for users and newcomers, the reference folder is for maintainers and operators, doc-comments are for callers. Do not merge these.
 - Note what is **generated** (API docs from doc-comments, tables from configuration): fix the source, never the generated artifact.

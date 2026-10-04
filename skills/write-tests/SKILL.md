@@ -33,7 +33,7 @@ Find the existing one:
 - Where do test projects/files live, and what is the naming convention (`*Tests`, `test_*.py`, `*.spec.ts`)? Put new tests exactly where the existing ones live.
 - How is a test named in this repository (`MethodName_Scenario_ExpectedResult` or otherwise)? Follow it.
 - What test utilities already exist (builders, fixtures, fakes, base classes, test containers)? Reuse them instead of writing new ad-hoc setup. Repositories following the common project structure often have a dedicated `TestUtilities` area — check it first.
-- **If the repository defines rules or scripts for tests, follow them.** For repositories using the common project structure, the test run is part of `scbuildcodeunit` — see the `work-with-common-project-structure` skill.
+- **If the repository defines rules or scripts for tests, follow them.** For repositories using the common project structure, the test run is part of `scbuildcodeunit` — see the `common-project-structure` skill.
 
 A test that is technically correct but stylistically foreign to the repository is a maintenance burden, no matter how good it is.
 

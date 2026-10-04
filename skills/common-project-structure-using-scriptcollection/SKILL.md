@@ -1,10 +1,10 @@
 ---
-name: automation-using-scriptcollection
+name: common-project-structure-using-scriptcollection
 description: Contains information about the automations provided by ScriptCollection and how to use them, especially in repositories which implement the "common project structure". If a repository implements the "common project structure" and uses automation through ScriptCollection to implement this, this skill is relevant. Whether this is the case can be recognized by the existence of the file "<repository>/.ScriptCollection/ProductInformation.xml".
 metadata:
   purpose: "Information about automation using ScriptCollection."
   tags: information, automation, conventions
-  version: 1.0.1
+  version: 1.1.0
 ---
 
 # General
@@ -37,7 +37,7 @@ If a repository only implements the common project structure without ScriptColle
 # Work with common-project-structure
 
 This section describes how the automation of a repository which implements the "common project structure" works when it is implemented using ScriptCollection.
-For the conventions of the common project structure itself see the skill `work-with-common-project-structure`.
+For the conventions of the common project structure itself see the skill `common-project-structure`.
 
 ## The scripts of a codeunit
 
@@ -160,7 +160,7 @@ Rules for this:
 
 | Command                  | Purpose                                                                                                      |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `scshowprojectversion`   | Prints the current version of the product/repository (calculated by gitversion).                             |
+| `scshowprojectversion`   | Prints the current version of the product/repository.                                                        |
 | `sccreatechangelogentry` | Creates the changelog-entry-file for the current version (`-m` for the message, `-c` to commit it directly). |
 | `scshowversion`          | Prints the version of the installed ScriptCollection itself (**not** the version of the project).            |
 
