@@ -20,3 +20,5 @@ A markdown file is correctly formatted if it adheres to the following rules:
 - One empty line before and after a code block, table, headline and list.
 - Table-cells have the same length in each column (padded with whitespace to match the longest cell in the column, this also applies to help-lines like `| --- | --- |`).
 - A multiline codeblock provides a language identifier after the opening backticks and uses "text" if the language is unknown or if no suitable language is available.
+- Do not change texts which come clearly from external, for example generated files or texts with copyright notices and common license-texts.
+- Never change a license-file, unless you are explicitly instructed to do so.
