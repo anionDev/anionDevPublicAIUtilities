@@ -181,7 +181,7 @@ If the section or the table does not exist yet, it SHALL be created.
 
 #### Scenario: A specification which is not fulfilled is found
 
-- **WHEN** a specification which is not fulfilled by the repository is found, regardless of whether it was found by a targeted check or by chance during any other work
+- **WHEN** a specification which is not fulfilled by the repository is found, regardless of whether it was found by a targeted check or by chance during any other work or by an audit which checks if all specs are fulfilled.
 - **THEN** this is added as a finding to the table in the section `## Findings` in `Other/Reference/Reference.md`
 
 #### Scenario: A list of findings is found in another document

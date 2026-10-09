@@ -17,5 +17,6 @@ Do the following things in this repository (not in the submodules):
 - If dependencies from PyPI are used then ensure that the used dependencies are pinned to a minimal version using ">=".
 
 If the project defines linting-rules ensure they are applied everywhere where applicable in the repository.
-If the project defines linting-commands or linting-scripts then run them and handle the findings: If a finding is a real issue then fix it in the code. If a finding is not a real issue (false positive) then suppress/ignore it using the mechanism of the linter. In any case only findings in files which are not git-ignored are relevant; findings in git-ignored files must be neither fixed nor ignored.
+If the project defines linting-commands or linting-scripts then run them and fix the valid findings.
+If the findings include false-positives then try to suppress or ignore them using the mechanism of the linting-tool which generated these false-positive findings.
 Format mark-down-files using the `format-markdown-file`-skill.
