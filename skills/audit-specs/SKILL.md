@@ -1,6 +1,6 @@
 ---
 name: audit-specs
-description: Audit the current codebase against ALL main OpenSpec specs (openspec/specs/), not just one change. Use when the user asks to check whether the code currently satisfies the specs or says "audit-specs" or says "/opsx:audit", or wants a drift report between specs and implementation. This skill is basically read-only.
+description: Audit the current codebase against ALL main OpenSpec specs (openspec/specs/), not just one change. Use when the user asks to check whether the code currently satisfies the specs or says "audit-specs", or wants a drift report between specs and implementation. This skill is basically read-only.
 metadata:
   version: 1.0.1
 ---
@@ -94,4 +94,4 @@ Do not fix anything automatically. Offer next steps:
 - If the repository has a place to collect findings, then add any unfulfilled spec there.
 - Fix drift: start a change with `/opsx:new` for the FAIL/PARTIAL items.
 - Spec is outdated: propose a change that updates the spec to match intended behavior.
-- Re-run `/opsx:audit` after changes are archived.
+- Re-run `audit-specs` after changes are archived.
