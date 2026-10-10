@@ -1,6 +1,6 @@
 ---
 name: audit-specs
-description: Audit the current codebase against ALL main OpenSpec specs (openspec/specs/), not just one change. Use when the user asks to check whether the code currently satisfies the specs or says "audit-specs", or wants a drift report between specs and implementation. This skill is basically read-only.
+description: Audit the current codebase against ALL main OpenSpec specs (openspec/specs/), not just one change. Use when the user asks to check whether the code currently satisfies the specs or says "audit-specs", or wants a drift report between specs and implementation. This skill is read-only.
 metadata:
   version: 1.0.1
 ---
@@ -42,7 +42,6 @@ For every requirement:
    - `partial` – implemented, but there are details which differ.
    - `fail` – not implemented, or behavior contradicts the spec.
    - `unverified` – could not be determined statically (e.g. depends on runtime, external service, config not in repo). Say what would be needed to check it.
-   - `accepted` – scenario is accepted despite deviations.
    - `not verifiable` – scenario cannot be verified with available information.
 
 Rules:
@@ -59,36 +58,19 @@ If time allows, note significant user-facing behavior found during the search th
 
 ## Output
 
-Respond in the user's language. Print the table in the following structure:
+Respond in the user's language. Print the findings in a markdown table. The output must have the following structure:
 
 ```
-## OpenSpec Audit – <date>
+# OpenSpec Audit – <date>
 
 **Scope:** <n> capabilities, <n> requirements, <n> scenarios
 **Result:** <n> PASS · <n> PARTIAL · <n> FAIL · <n> UNVERIFIED
 
-### Findings
-
-CRITICAL   – FAIL scenarios (spec says X, code does Y / nothing)
-WARNING    – PARTIAL scenarios, scenarios without any test
-SUGGESTION – UNVERIFIED items, ambiguous specs, undocumented behavior
-
-### Per capability
-
-#### <capability>
-
-| Requirement | Scenario | Status | Evidence | Test |
-| ----------- | -------- | ------ | -------- | ---- |
-
-### Active changes affecting this audit
-
-<change name> – <which requirements it touches, expected divergence>
+| Number | Requirement | Scenario | Status | Evidence | Test |
+| ------ | ----------- | -------- | ------ | -------- | ---- |
 ```
 
 This only applies to the chat-output.
-For additions and edits in any findings-collection-list or findings-collection-table in the repository use the format which is already there.
-
-Each CRITICAL/WARNING finding gets: requirement, scenario, what the spec says, what the code does, file:line, and a one-line suggested next step (fix code via a new change, or update the spec if the code is right).
 
 ## After the audit
 
