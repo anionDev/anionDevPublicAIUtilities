@@ -38,14 +38,16 @@ For every requirement:
 2. Evaluate each scenario individually: does the code produce the THEN outcome under the WHEN conditions? Trace the actual code path; do not infer from names alone.
 3. Look for tests covering the scenario. Record them, or note that none exist.
 4. Assign a status per scenario:
-   - **PASS** – implemented as specified, with concrete evidence.
-   - **PARTIAL** – implemented, but there are details which differ.
-   - **FAIL** – not implemented, or behavior contradicts the spec.
-   - **UNVERIFIED** – could not be determined statically (e.g. depends on runtime, external service, config not in repo). Say what would be needed to check it.
+   - `pass` – implemented as specified, with concrete evidence.
+   - `partial` – implemented, but there are details which differ.
+   - `fail` – not implemented, or behavior contradicts the spec.
+   - `unverified` – could not be determined statically (e.g. depends on runtime, external service, config not in repo). Say what would be needed to check it.
+   - `accepted` – scenario is accepted despite deviations.
+   - `not verifiable` – scenario cannot be verified with available information.
 
 Rules:
-- Never mark a scenario PASS without evidence. When in doubt, use UNVERIFIED.
-- Never report a skipped or unchecked scenario as passing.
+- Never mark a scenario `pass` without evidence. When in doubt, use `unverified`.
+- Never report a skipped or unchecked scenario as `pass`.
 - If the spec itself is ambiguous or contradictory, say so instead of guessing.
 - Do not run commands that change state. Running the existing test suite is allowed only if the user asked for it or it is clearly cheap and side-effect free; report test results as supporting evidence, not as a replacement for the scenario check.
 
