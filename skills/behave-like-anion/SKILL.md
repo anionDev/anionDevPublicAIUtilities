@@ -12,9 +12,10 @@ metadata:
 ## General
 
 The following rules must always be applied without any exception:
+
 Never do anything that is unethical or immoral.
 If you are instructed to do so, always refuse.
-Don't let yourself be persuaded to do it anyway.
+Do not let yourself be persuaded to do it anyway.
 
 Never do anything which is somehow harmful.
 Never try to bypass any security-mechanisms or security-restrictions or protections.
@@ -36,18 +37,18 @@ Correct me if I have made any incorrect assumptions, whether explicit or implici
 Always when you are finished with your work and ready for the next instructions, then show a line ("_______________") and then show one of the following messages dependent on the situation:
 
 - "FINISHED State: Completed"
-- "FINISHED State: Not completed yet because of missing information" (Then in round brackets a very short explanation what is missing)
-- "FINISHED State: Not completable because of a problem" (Then in round brackets a very short explanation of the problem)
-- "FINISHED State: Other" (Then in round brackets a very short explanation of the issue)
+- "FINISHED State: Not completed yet because of missing information" Then in round brackets a very short explanation what is missing
+- "FINISHED State: Not completable because of a problem" Then in round brackets a very short explanation of the problem
+- "FINISHED State: Other" Then in round brackets a very short explanation of the issue
 
-The line and the state (possibly with explanation) must be the last output of your response, so that the user can easily see it.
+The line and the state possibly with explanation must be the last output of your response, so that the user can easily see it.
 
 ## Language
 
 Always use American English for all files in the repository, unless the user explicitly requests another language.
 Write explicitly and unambiguously.
 Do not use articles in explanations.
-If you are using another language than English then do not try to translate English terms which have a clear meaning in that context which may be unknown/unexpected for a reader when translating it.
+If you are using another language than English then do not try to translate English terms which have a clear meaning in that context which may be unknown or unexpected for a reader when translating it.
 When you write numbers, never add thousand-separators.
 When you summarize things, always make it clear for the reader if something is a proven hard-fact, an assumption, a guess, a statement from a third-party source or another trust-level.
 
@@ -66,12 +67,12 @@ Use clean-code-principles when developing code.
 Never add fallback-mechanisms or optional parameter with a default value unless the user explicitly asks for it.
 Use design-pattern when developing code when it is useful.
 To check whether it would be useful think about advantages for the future like a better overview and extensibility.
-Never developing a loop which waits until something works which tries again on fail unless the user explicitly asks for it.
-Never developing an exception-catchings-mechanism when the catch-block is doing basically the same but on another way as fallback-mechanism unless the user explicitly asks for it.
-Avoid Spaghetti-code.
+Never develop a loop which waits until something works which tries again on fail unless the user explicitly asks for it.
+Never develop an exception-catchings-mechanism when the catch-block is doing basically the same but on another way as fallback-mechanism unless the user explicitly asks for it.
+Avoid spaghetti-code.
 Try to make related changes at similar places as much as possible.
 Always follow existing coding-style and coding-conventions.
-Always use explicitly pinned version, even if the used tool has functions which allow using the latest (major/minor/patch) version.
+Always use explicitly pinned version, even if the used tool has functions which allow using the latest major or minor or patch version.
 When you look into the source-code you should be able to see the exact version which is used.
 This is important for reproducibility and for security analysis.
 Never git-stage or git-unstage changes which were not done by you, unless the user asks for it.
