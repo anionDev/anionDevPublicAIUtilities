@@ -6,7 +6,7 @@ Records how the colors of a product with a user-interface are defined and applie
 They are not derivable from the source-code itself:
 
 - They state that the colors have one single source of truth - the color-palette - so that the appearance of the product can be changed in one place and a component can never disagree with the rest of the user-interface about what a color is.
-- They state that there is one palette per theme-mode, a light one and a dark one, so that both modes are defined deliberately instead of one of them being an afterthought that drifts out of sync.
+- They state that the product has a light-mode and a dark-mode with one palette each, so that both modes are defined deliberately instead of one of them being an afterthought that drifts out of sync.
 - They state that the design-system is Material 3 and that the palettes are applied through it, so that every component and every page follows the palette automatically instead of each one being styled by hand.
 
 ## Requirements
@@ -32,10 +32,16 @@ Changing the appearance of the product SHALL be possible by changing the palette
 - **WHEN** the colors of the product are to be changed
 - **THEN** only the palette is changed, and the change takes effect everywhere in the user-interface without any component having to be touched
 
-### Requirement: There is one color-palette per theme-mode
+### Requirement: The product has a light-mode and a dark-mode, each with its own color-palette
 
+The user-interface SHALL offer both a light-mode and a dark-mode.
 There SHALL be exactly two color-palettes: one for light-mode and one for dark-mode.
 Both SHALL be defined together as the single source of truth described above, so that each theme-mode has its own deliberately chosen colors.
+
+#### Scenario: A theme-mode is missing
+
+- **WHEN** the user-interface offers only a light-mode or only a dark-mode
+- **THEN** this is a defect, resolved by adding the missing theme-mode together with its palette
 
 #### Scenario: The product is themed
 

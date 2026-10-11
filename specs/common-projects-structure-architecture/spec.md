@@ -123,6 +123,15 @@ Whenever it is checked whether the specifications of this repository are still u
 - **WHEN** a change of the source-code is considered finished
 - **THEN** the documents which describe what that change touched have been updated together with it and not in a later separate step
 
+### Requirement: Specifications of business-logic are named "business-logic"
+
+If business-logic of this repository is defined by a specification, the name of that specification SHALL be `business-logic` or SHALL begin with `business-logic-`, for example `openspec/specs/business-logic/spec.md` or `openspec/specs/business-logic-invoicing/spec.md`.
+
+#### Scenario: A specification of business-logic has another name
+
+- **WHEN** a specification which defines business-logic has a name which is neither `business-logic` nor begins with `business-logic-`
+- **THEN** this is a defect, resolved by renaming the specification and every reference to it
+
 ### Requirement: Documents which record the past are not adjusted
 
 A document which records what was true at a point in time SHALL NOT be adjusted to the current state.
