@@ -7,12 +7,23 @@ metadata:
   version: 1.0.1
 ---
 
-Summarize the uncommitted git-changes of this branch in short and write them to the current changelog-file if a changelog exists in the current repository and if they are not already listed there.
-Creating a changelog-entry makes only sense if the current branch is not `main` or if there are changes.
-Otherwise do not do anything but print a hint about the wrong branch.
+# Analyze Changes
 
-In the end, as last output-line write a suggestion for a good git-commit-command for all changes which are still uncommitted including a good commit-message for it.
+Summarize the changes in this repository in short.
+
+# Uncommitted Changes
+
+If there are currently uncomitted changes in the repository:
+Describe the uncomitted changes.
+
+## Commit Suggestion
+
+In the end, as last output-line write a suggestion for a good one-line git-commit-command for all changes which are still uncommitted including a good commit-message for it.
 The commit-subject should be a short summary of the changes in this branch.
-Optionally you can add a commit-body which describes the changes in more detail.
-Use the commit-skill for that.
-The commit-message should be written in American English and should not contain any special characters like umlauts, single-quotes, double-quotes, backslashes or non-ascii-characters.
+Optionally you can add a commit-body to the suggestion which describes the changes in more detail.
+Commit-message and commit-body should be written in American English.
+
+# No uncommitted changes
+
+If there are no uncommitted changes:
+Describe the changes on the current branch compared to the main branch.
