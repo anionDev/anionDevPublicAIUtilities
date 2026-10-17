@@ -169,9 +169,10 @@ Every finding MUST have an id of the form `<prefix>-<ascending number>`.
 The prefix MUST be chosen by the first of the following rules which applies:
 
 1. `SEC` if the finding is relevant for security.
-2. `BUG` if the finding is a bug.
+2. `BUS` if the finding is about incorrectly implemented business-logic.
 3. `PER` if the finding has an impact on performance.
-4. `OTH` for every other finding.
+4. `BUG` if the finding is any kind of bug.
+5. `OTH` for every other finding.
 
 The number MUST be ascending per prefix, written without leading zeros for example `SEC-1` or `SEC-12`, but not `SEC-01`, and an id MUST never be reused for another finding, not even after the finding was fixed.
 
