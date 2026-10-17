@@ -44,14 +44,17 @@ The codeunits of this repository are the folders which contain such a codeunit-f
 ### Requirement: Documentation which describes the current state agrees with the source-code
 
 Every document of this repository which describes the current state of the product SHALL describe it the way the source-code of the current branch implements it.
-The documents which this applies to are at least:
 
-- `ReadMe.md` in the repository-root
-- the `ReadMe.md` of every codeunit the codeunits of this repository are the folders which contain a `<codeunit-name>.codeunit.xml`
-- `Contributing.md`
-- everything below `Other/Reference`
-- everything below `<codeunit>/Other/Reference/ReferenceContent`, especially `Hints.md`, `HowToBuild.md` and the articles
-- the doc-comments in the source-code
+#### Scenario: The documents to which this requirement applies
+
+- **WHEN** it is checked which documents the requirement applies to
+- **THEN** these documents are at least:
+  - `ReadMe.md` in the repository-root
+  - the `ReadMe.md` of every codeunit (the codeunits of this repository are the folders which contain a `<codeunit-name>.codeunit.xml`)
+  - `Contributing.md`
+  - everything below `Other/Reference`
+  - everything below `<codeunit>/Other/Reference/ReferenceContent`, especially `Hints.md`, `HowToBuild.md` and the articles
+  - the doc-comments in the source-code
 
 #### Scenario: A document states something which the source-code does not do
 
@@ -166,17 +169,27 @@ If the section or the table does not exist yet, it SHALL be created.
 ### Requirement: Findings have an id with a prefix and an ascending number
 
 Every finding MUST have an id of the form `<prefix>-<ascending number>`.
-The prefix MUST be chosen by the first of the following rules which applies:
 
-1. `SEC` if the finding is relevant for security.
-2. `BUS` if the finding is about incorrectly implemented business-logic.
-3. `PER` if the finding has an impact on performance.
-4. `BUG` if the finding is any kind of bug.
-5. `OTH` for every other finding.
+#### Scenario: The prefix of a new finding is chosen
 
-The number MUST be ascending per prefix, written without leading zeros for example `SEC-1` or `SEC-12`, but not `SEC-01`, and an id MUST never be reused for another finding, not even after the finding was fixed.
+- **WHEN** a new finding gets a prefix
+- **THEN** the prefix is chosen by the first of the following rules which applies:
+  1. `SEC` if the finding is relevant for security
+  2. `BUS` if the finding is about incorrectly implemented business-logic
+  3. `PER` if the finding has an impact on performance
+  4. `BUG` if the finding is any kind of bug
+  5. `OTH` for every other finding
 
-If there are already findings with another name-pattern then it is allowed to rename them to follow the name-pattern specified here.
+#### Scenario: The number of a new finding is chosen
+
+- **WHEN** a new finding gets a number
+- **THEN** the number is ascending per prefix, written without leading zeros (for example `SEC-1` or `SEC-12`, but not `SEC-01`)
+- **AND** the id is never reused for another finding, not even after the finding was fixed
+
+#### Scenario: Existing findings follow another name-pattern
+
+- **WHEN** findings already exist with another name-pattern
+- **THEN** they may be renamed to follow the name-pattern specified here
 
 #### Scenario: A new finding is added
 
@@ -190,18 +203,43 @@ If there are already findings with another name-pattern then it is allowed to re
 
 ### Requirement: The findings-table has fixed columns
 
-The table MUST have exactly the following columns in this order:
+The findings-table MUST have a fixed set of columns in a fixed order.
 
-- `Id`: the id of the finding.
-- `Priority`: the priority of the finding, which is `low`, `mid` or `high` or `very high`.
-  - Findings which reveals very important or critical security-problems must be marked as `very high`.
-  - Findings which reveals very heavy performance-problems must be marked as `high` or `very high`.
-- `State`: the state of the finding, which is `open`, `accepted`, `not verifiable` or `fixed`. Another state is only used if none of these three applies, and the reason for it is written into `Notes`. If an issue is fixed partially then this MUST be treated as `open`.
-- `Description`: what the finding is.
-- `Impact`: what the finding causes, depending on its topic, for example the security-impact or the performance-impact.
-- `Notes`: every further information, especially the content of further columns which a list of findings had before it was moved into the table.
+#### Scenario: The columns of the findings-table
 
-If there are already tables with another structure then it is allowed to update the table to follow the structure specified here.
+- **WHEN** the findings-table is created or checked
+- **THEN** it has exactly these columns in this order:
+  - `Id`: the id of the finding
+  - `Priority`: the priority of the finding, which is `low`, `mid`, `high` or `very high`
+  - `State`: the state of the finding, which is `open`, `accepted`, `not verifiable` or `fixed`
+  - `Description`: what the finding is
+  - `Impact`: what the finding causes, depending on its topic, for example the security-impact or the performance-impact
+  - `Notes`: every further information, especially the content of further columns which a list of findings had before it was moved into the table
+
+#### Scenario: A finding reveals a critical security-problem
+
+- **WHEN** a finding reveals very important or critical security-problems
+- **THEN** its `Priority` is marked as `very high`
+
+#### Scenario: A finding reveals a severe performance-problem
+
+- **WHEN** a finding reveals very heavy performance-problems
+- **THEN** its `Priority` is marked as `high` or `very high`
+
+#### Scenario: The state of a finding does not fit the standard set
+
+- **WHEN** none of `open`, `accepted`, `not verifiable` or `fixed` applies to a finding
+- **THEN** another state is used and the reason for it is written into `Notes`
+
+#### Scenario: A finding is only fixed partially
+
+- **WHEN** an issue is fixed partially
+- **THEN** its state is treated as `open`
+
+#### Scenario: An existing table has another structure
+
+- **WHEN** tables already exist with another structure
+- **THEN** they may be updated to follow the structure specified here
 
 #### Scenario: A list of findings has further columns
 
