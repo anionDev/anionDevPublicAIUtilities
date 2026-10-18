@@ -84,7 +84,7 @@ AI-tooling folders (`.agents/`, `.claude/`, `.github/`, `.vscode/`, …) are pre
 
 ```xml
 <?xml version='1.0' encoding='utf-8'?>
-<productinformation xmlns="https://projects.aniondev.de/PublicProjects/Common/ProjectTemplates/-/tree/main/Conventions/RepositoryStructure/CommonProjectStructure">
+<productinformation xmlns="https://projects.aniondev.de/PublicProjects/Common/ProjectTemplates/-/tree/v3.0.4/Conventions/RepositoryStructure/CommonProjectStructure">
   <producttitle>YourProductName</producttitle>
   <remoteaddress>https://github.com/anionDev/YourProductName</remoteaddress>
   <requiredenvironmentvariables />
