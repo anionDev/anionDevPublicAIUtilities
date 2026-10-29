@@ -267,8 +267,9 @@ If the behaviour turns out to be wrong or missing, the fix belongs into the Scri
 ## Changelog
 
 To find the correct changelog-file: Use `scshowprojectversion` to show the current product-version.
-It is important to determine the version after implementing the changes, not before it.
+It is important to determine the version after implementing the changes, not before.
 The changelog-filename in the changelog-folder is then `v<version>.md`, where `<version>` is the version shown by `scshowprojectversion`.
+ScriptCollection does automatic version-bumps at multiple places when building codeunits.
 
 # Hints
 

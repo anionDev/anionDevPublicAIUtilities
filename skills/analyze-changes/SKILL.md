@@ -13,8 +13,8 @@ Summarize the changes in this repository in short.
 
 # Uncommitted Changes
 
-If there are currently uncomitted changes in the repository:
-Describe the uncomitted changes.
+If there are currently uncommitted changes in the repository:
+Describe the uncommitted changes.
 
 ## Commit Suggestion
 
