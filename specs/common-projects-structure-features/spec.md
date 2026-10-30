@@ -2,26 +2,21 @@
 
 ## Purpose
 
-Every product maintains a single list of the features which a user can expect from it. This list is the one place which answers,
-from the perspective of a user and not of the source-code, what the product can do and what it can not do yet.
+Every product maintains a single list of the features which a user can expect from it.
+This list is the one place which answers, from the perspective of a user and not of the source-code, what the product can do and what it can not do yet.
 
-A feature-list is only useful if it is complete and if it is honest: it has to contain every feature which a user can observe,
-including the features which are planned but not implemented yet, and the stated availability of every feature has to be the one
-which the source-code of the current branch actually provides. A list which silently drops a planned feature stops being an
-overview of what is planned, and a list whose availability does not follow the source-code misleads the reader about what the
-product can do.
+A feature-list is only useful if it is complete and if it is honest: it has to contain every feature which a user can observe, including the features which are planned but not implemented yet, and the stated availability of every feature has to be the one which the source-code of the current branch actually provides.
+A list which silently drops a planned feature stops being an overview of what is planned, and a list whose availability does not follow the source-code misleads the reader about what the product can do.
 
-This specification is product-agnostic: it defines the location, the structure and the meaning of the feature-list and the rules
-which keep it complete and honest, without naming any concrete feature or product. It can be used unchanged in any product which
-follows the common project structure.
+This specification is product-agnostic: it defines the location, the structure and the meaning of the feature-list and the rules which keep it complete and honest, without naming any concrete feature or product.
+It can be used unchanged in any product which follows the common project structure.
 
 ## Requirements
 
 ### Requirement: The product has a feature-list in a fixed place
 
-The product SHALL contain a section `## Features` in `Other/Reference/Reference.md` which holds exactly one table that is the
-complete list of the features which a user can expect from the product. Other documents MAY give a shorter overview of features,
-but this table SHALL be the one which is complete and which the other overviews agree with.
+The product SHALL contain a section `## Features` in `Other/Reference/Reference.md` which holds exactly one table that is the complete list of the features which a user can expect from the product.
+Other documents MAY give a shorter overview of features, but this table SHALL be the one which is complete and which the other overviews agree with.
 
 #### Scenario: The complete feature-list is requested
 
@@ -61,9 +56,9 @@ No further column SHALL be added to the table.
 
 ### Requirement: The id of a feature has a fixed form
 
-Every feature MUST have an id of the form `feat-<ascending number>`. The number MUST be written without leading zeros (for
-example `feat-1` or `feat-12`, but not `feat-01`) and MUST be ascending. An id MUST never be reused for another feature, not even
-after a feature was removed.
+Every feature MUST have an id of the form `feat-<ascending number>`.
+The number MUST be written without leading zeros (for example `feat-1` or `feat-12`, but not `feat-01`) and MUST be ascending.
+An id MUST never be reused for another feature, not even after a feature was removed.
 
 #### Scenario: A new feature is added
 
@@ -89,9 +84,8 @@ The column `state` of every feature MUST have exactly one of the following value
 
 ### Requirement: The feature-list contains every user-facing feature
 
-Every feature which a user can observe or expect from the product SHALL have a row in the table, judged from the perspective of a
-user and not from the structure of the source-code. A feature which is planned but not implemented yet SHALL stay in the list
-with the state `unavailable` instead of being left out, so that the list is also an overview of what is planned.
+Every feature which a user can observe or expect from the product SHALL have a row in the table, judged from the perspective of a user and not from the structure of the source-code.
+A feature which is planned but not implemented yet SHALL stay in the list with the state `unavailable` instead of being left out, so that the list is also an overview of what is planned.
 
 #### Scenario: A feature exists but is not listed
 
@@ -110,10 +104,9 @@ with the state `unavailable` instead of being left out, so that the list is also
 
 ### Requirement: The state of a feature reflects the current state of the source-code
 
-The `state` of every feature SHALL be the one which the source-code of the current branch implements, determined by checking the
-source-code itself and not the documentation or comments. A feature is `available` if and only if a user can actually use it in
-the current state of the source-code; otherwise it is `unavailable`. A feature whose availability changed SHALL have its `state`
-corrected, and it SHALL NOT be removed from the table because of such a change.
+The `state` of every feature SHALL be the one which the source-code of the current branch implements, determined by checking the source-code itself and not the documentation or comments.
+A feature is `available` if and only if a user can actually use it in the current state of the source-code; otherwise it is `unavailable`.
+A feature whose availability changed SHALL have its `state` corrected, and it SHALL NOT be removed from the table because of such a change.
 
 #### Scenario: A feature became usable
 

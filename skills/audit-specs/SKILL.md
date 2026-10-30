@@ -47,6 +47,7 @@ For every requirement:
    - `not verifiable` scenario cannot be verified with available information.
 
 Rules:
+
 - Never mark a scenario `pass` without evidence. When in doubt, use `unverified`.
 - Never report a skipped or unchecked scenario as `pass`.
 - If the spec itself is ambiguous or contradictory, say so instead of guessing.
@@ -65,7 +66,7 @@ Respond in the user's language.
 Print the findings in a markdown table.
 The output must have the following structure:
 
-```
+```text
 # OpenSpec Audit <date>
 
 **Scope:** <n> capabilities, <n> requirements, <n> scenarios
@@ -81,6 +82,7 @@ This only applies to the chat-output.
 
 Do not fix anything automatically.
 Offer next steps:
+
 - If the repository has a place to collect findings, then add any unfulfilled spec there.
 - Fix drift: start a change with `/opsx:new` for the FAIL or PARTIAL items.
 - Spec is outdated: propose a change that updates the spec to match intended behavior.

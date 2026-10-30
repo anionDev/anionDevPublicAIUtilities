@@ -46,7 +46,8 @@ While iterating, `-v 4` (higher verbosity) makes a failing run easier to diagnos
 
 ## Look at the examples first
 
-Do **not** assemble the required files from memory. There is an official repository with one minimal example-codeunit per technology and project-type:
+Do **not** assemble the required files from memory.
+There is an official repository with one minimal example-codeunit per technology and project-type:
 
 - Locally (if available): `E:\Data\Projects\CommonProjectStructureExamples`
 - Online: https://github.com/anionDev/CommonProjectStructureExamples (note: user `anionDev`, not the organization `anionDevelopment`)
@@ -57,28 +58,30 @@ The examples are minimal on purpose: copy their **shape**, not their content.
 
 ## Target structure
 
-The following is the concrete target. All paths are relative to `<repository>`.
+The following is the concrete target.
+All paths are relative to `<repository>`.
 
 ### Repository-root overhead
 
-| Path                                         | Hand-authored / generated | Purpose                                                                                         |
-| -------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------- |
-| `.ScriptCollection/ProductInformation.xml`   | hand-authored             | Product-level metadata (see below). Its existence is what marks a repo as using this structure. |
-| `.ScriptCollection/OCIImages/ImageDefinition.csv` | hand-authored        | Pinned OCI-images the pipeline/test-services use (only if container-images are needed).          |
-| `.ScriptCollection/.gitignore`               | hand-authored             | Ignores `/Cache/`.                                                                               |
-| `<repository>.code-workspace`                | hand-authored             | The source of truth for the tasks (`tasks`-section with `aliases`); references the repo as one folder. |
-| `Taskfile.yml`                               | **generated**             | Generated from the `.code-workspace`-file during the build. Never edit by hand.                  |
-| `ReadMe.md`                                  | hand-authored             | Product overview + codeunit-table.                                                               |
-| `License.txt`                                | hand-authored             | License.                                                                                         |
-| `Contributing.md` / `ContributorLicenseAgreement.txt` | hand-authored    | Contribution-rules + CLA (optional, but present in the examples).                                |
-| `.gitignore`, `.gitattributes`, `.pylintrc`, `.betterleaks.toml` | hand-authored | Repo-level config.                                                                     |
-| `Other/`                                     | mixed                     | Repository-level resources (changelog, scripts, local test-services, …); see below.             |
-| `Other/Scripts/PrepareBuildCodeunits.py`     | hand-authored (thin)      | Repo-level pre-build hook (delegates to `ScriptCollection.TFCPS.TFCPS_Generic`).                 |
-| `Other/Resources/Changelog/v<version>.md`    | hand-authored             | One changelog-file per version.                                                                  |
-| `Other/Reference/RepositoryStructure.md`     | hand-authored             | Documents what a codeunit is and the script-run-order.                                           |
-| one folder per codeunit (`<codeunit>/`)      | mixed                     | See "Each codeunit".                                                                             |
+| Path                                                             | Hand-authored / generated | Purpose                                                                                                |
+| ---------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `.ScriptCollection/ProductInformation.xml`                       | hand-authored             | Product-level metadata (see below). Its existence is what marks a repo as using this structure.        |
+| `.ScriptCollection/OCIImages/ImageDefinition.csv`                | hand-authored             | Pinned OCI-images the pipeline/test-services use (only if container-images are needed).                |
+| `.ScriptCollection/.gitignore`                                   | hand-authored             | Ignores `/Cache/`.                                                                                     |
+| `<repository>.code-workspace`                                    | hand-authored             | The source of truth for the tasks (`tasks`-section with `aliases`); references the repo as one folder. |
+| `Taskfile.yml`                                                   | **generated**             | Generated from the `.code-workspace`-file during the build. Never edit by hand.                        |
+| `ReadMe.md`                                                      | hand-authored             | Product overview + codeunit-table.                                                                     |
+| `License.txt`                                                    | hand-authored             | License.                                                                                               |
+| `Contributing.md` / `ContributorLicenseAgreement.txt`            | hand-authored             | Contribution-rules + CLA (optional, but present in the examples).                                      |
+| `.gitignore`, `.gitattributes`, `.pylintrc`, `.betterleaks.toml` | hand-authored             | Repo-level config.                                                                                     |
+| `Other/`                                                         | mixed                     | Repository-level resources (changelog, scripts, local test-services, …); see below.                    |
+| `Other/Scripts/PrepareBuildCodeunits.py`                         | hand-authored (thin)      | Repo-level pre-build hook (delegates to `ScriptCollection.TFCPS.TFCPS_Generic`).                       |
+| `Other/Resources/Changelog/v<version>.md`                        | hand-authored             | One changelog-file per version.                                                                        |
+| `Other/Reference/RepositoryStructure.md`                         | hand-authored             | Documents what a codeunit is and the script-run-order.                                                 |
+| one folder per codeunit (`<codeunit>/`)                          | mixed                     | See "Each codeunit".                                                                                   |
 
-AI-tooling folders (`.agents/`, `.claude/`, `.github/`, `.vscode/`, …) are present in the examples; create them only if the repository actually uses the corresponding tooling. The skills under `.agents/skills` are the single source of truth and are synchronized into the other agents' folders automatically by the build (see `common-project-structure-using-scriptcollection`).
+AI-tooling folders (`.agents/`, `.claude/`, `.github/`, `.vscode/`, …) are present in the examples; create them only if the repository actually uses the corresponding tooling.
+The skills under `.agents/skills` are the single source of truth and are synchronized into the other agents' folders automatically by the build (see `common-project-structure-using-scriptcollection`).
 
 `.ScriptCollection/ProductInformation.xml` has this shape:
 
@@ -95,7 +98,8 @@ It must be valid against `productinformation.xsd` (referenced by URL in the sche
 
 ### Each codeunit
 
-A codeunit lives in `<repository>/<codeunit>/` and is recognizable by `<codeunit>/<codeunit>.codeunit.xml`. Its layout:
+A codeunit lives in `<repository>/<codeunit>/` and is recognizable by `<codeunit>/<codeunit>.codeunit.xml`.
+Its layout:
 
 ```text
 <codeunit>/
@@ -122,7 +126,9 @@ The exact set of technology-specific extra files (for .NET: `.sln`, `.csproj`, `
 
 ### The scripts are thin wrappers
 
-The python-scripts of a codeunit must be at exactly those paths and names, must be python, and must only **delegate** to `ScriptCollection.TFCPS`. They contain no business-logic. For a .NET-codeunit they look like this (one method-call each):
+The python-scripts of a codeunit must be at exactly those paths and names, must be python, and must only **delegate** to `ScriptCollection.TFCPS`.
+They contain no business-logic.
+For a .NET-codeunit they look like this (one method-call each):
 
 ```python
 from ScriptCollection.TFCPS.DotNet.TFCPS_CodeUnitSpecific_DotNet import TFCPS_CodeUnitSpecific_DotNet_Functions,TFCPS_CodeUnitSpecific_DotNet_CLI
@@ -137,9 +143,12 @@ if __name__ == "__main__":
     build()
 ```
 
-For another technology, the `.DotNet.` segment and the class-names are replaced by that technology's variant. Always copy the concrete scripts from the matching example instead of writing them yourself — this guarantees the correct method-calls and arguments.
+For another technology, the `.DotNet.` segment and the class-names are replaced by that technology's variant.
+Always copy the concrete scripts from the matching example instead of writing them yourself — this guarantees the correct method-calls and arguments.
 
-`<codeunit>/<codeunit>.codeunit.xml` must be valid against `codeunit.xsd` and declares `name`, `version`, owner, `developerteam`, the `properties` (for example `codeunithastestablesourcecode`, `codeunithasupdatabledependencies`, `testsettings/@minimalcodecoverageinpercent`, `pipelinedemands`) and `dependentcodeunits`. Use the same `codeunitspecificationversion` as the current examples. Copy it from the matching example and adapt it.
+`<codeunit>/<codeunit>.codeunit.xml` must be valid against `codeunit.xsd` and declares `name`, `version`, owner, `developerteam`, the `properties` (for example `codeunithastestablesourcecode`, `codeunithasupdatabledependencies`, `testsettings/@minimalcodecoverageinpercent`, `pipelinedemands`) and `dependentcodeunits`.
+Use the same `codeunitspecificationversion` as the current examples.
+Copy it from the matching example and adapt it.
 
 ## Migration procedure
 
@@ -185,4 +194,5 @@ Work top-down and verify continuously with the migration-target-criterion.
 
 ## When something is missing in ScriptCollection
 
-If the migration cannot be finished because an automation is missing or wrong in ScriptCollection itself (not because of a mistake in the repository being migrated), the fix belongs into the ScriptCollection-repository (https://github.com/anionDevelopment/ScriptCollection, mirror https://github.com/anionDev/ScriptCollection), not as a workaround into the repository being onboarded. See the "Find out what a function really does" section of the `common-project-structure-using-scriptcollection`-skill for where to read its source-code.
+If the migration cannot be finished because an automation is missing or wrong in ScriptCollection itself (not because of a mistake in the repository being migrated), the fix belongs into the ScriptCollection-repository (https://github.com/anionDevelopment/ScriptCollection, mirror https://github.com/anionDev/ScriptCollection), not as a workaround into the repository being onboarded.
+See the "Find out what a function really does" section of the `common-project-structure-using-scriptcollection`-skill for where to read its source-code.

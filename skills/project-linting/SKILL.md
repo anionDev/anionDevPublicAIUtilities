@@ -19,4 +19,4 @@ Do the following things in this repository (not in the submodules):
 If the project defines linting-rules ensure they are applied everywhere where applicable in the repository.
 If the project defines linting-commands or linting-scripts then run them and fix the valid findings.
 If the findings include false-positives then try to suppress or ignore them using the mechanism of the linting-tool which generated these false-positive findings.
-Format mark-down-files using the `format-markdown-file`-skill.
+Format markdown-files using the `format-markdown-file`-skill.

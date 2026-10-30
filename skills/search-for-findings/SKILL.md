@@ -11,6 +11,7 @@ Search for any kind of findings in the current repository.
 If there is one central finding list for the current repository, add all discovered findings to that list.
 
 A finding is:
+
 - Any security vulnerability discovered in the repository.
 - Any linting issue found in the codebase.
 - Any other issue/bug/performance-bottleneck that could potentially affect the quality, security, or maintainability of the project.

@@ -44,7 +44,8 @@ After creation usually `Configuration/docker-compose.yml` must be adapted (ports
 
 ### Start application ("up")
 
-Adame has no `up`-command. Use one of:
+Adame has no `up`-command.
+Use one of:
 
 ```sh
 sudo adame startadvanced --configurationfile /srv/MyApplication/Configuration/Adame.configuration
@@ -57,7 +58,8 @@ sudo adame start --configurationfile /srv/MyApplication/Configuration/Adame.conf
 
 ### Stop application ("down")
 
-Adame has no `down`-command. Use one of:
+Adame has no `down`-command.
+Use one of:
 
 ```sh
 sudo adame stopadvanced --configurationfile /srv/MyApplication/Configuration/Adame.configuration
@@ -80,23 +82,23 @@ All take `--configurationfile <path to Adame.configuration>`:
 
 ## Structure of Adame-repository
 
-| Path | Content |
-| --- | --- |
-| `ReadMe.md`, `License.txt`, `.gitignore` | Generated once on `create`, freely editable, never regenerated. |
-| `Configuration/Adame.configuration` | Main configuration (INI, section `[general]`): `name`, `owner`, `repositoryid`, `networkinterface`, `maximalexpectedstartduration` (seconds to wait after start), `prescript`, `postscript`, optional `logtargetfolder`. Path of this file is argument for all commands except `create`. |
-| `Configuration/docker-compose.yml` | Docker-compose-definition of application. Freely editable. Paths are relative to `Configuration`. |
-| `Configuration/Parameters.env` | Optional env-file for docker compose. |
-| `Configuration/Volumes/` | Conventional location for volumes mounted into container (for example `./Volumes/Data`). Content is committed into repository. |
-| `Configuration/RunningInformation.txt` | Last known state of container- and IDS-process, written by Adame. Do not edit. |
-| `Configuration/FileMetadata.csv` | File-metadata of volumes, written by Adame. Do not edit. |
-| `Configuration/.gitconfig` | Git-configuration used by Adame (author, signing). |
-| `Configuration/Security/Security.configuration` | INI: `[general]` with `gpgkeyofowner`, `remoteaddress`/`remotename`/`remotebranch` (backup-remote), `enableids`, `idsname`, `siemaddress`/`siemfolder`/`siemuser`; `[snort]` with `globalconfigurationfile`. |
-| `Configuration/Security/Networktraffic.Custom.rules` | Custom IDS-rules, editable. |
-| `Configuration/Security/Networktraffic.Generated.rules` | Generated IDS-rules. Do not edit, overwritten by Adame. |
-| `Configuration/Security/ApplicationProvidedSecurityInformation.xml` | Optional security-information about application. |
-| `Logs/Application/` | Application-logs (mount it into container, for example `./../Logs/Application:/...`). Git-ignored. |
-| `Logs/IDS/` | IDS-logs. Git-ignored. |
-| `Logs/Overhead/` | Logs of Adame itself. Git-ignored. Look here first when a command fails. |
+| Path                                                                | Content                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ReadMe.md`, `License.txt`, `.gitignore`                            | Generated once on `create`, freely editable, never regenerated.                                                                                                                                                                                                                          |
+| `Configuration/Adame.configuration`                                 | Main configuration (INI, section `[general]`): `name`, `owner`, `repositoryid`, `networkinterface`, `maximalexpectedstartduration` (seconds to wait after start), `prescript`, `postscript`, optional `logtargetfolder`. Path of this file is argument for all commands except `create`. |
+| `Configuration/docker-compose.yml`                                  | Docker-compose-definition of application. Freely editable. Paths are relative to `Configuration`.                                                                                                                                                                                        |
+| `Configuration/Parameters.env`                                      | Optional env-file for docker compose.                                                                                                                                                                                                                                                    |
+| `Configuration/Volumes/`                                            | Conventional location for volumes mounted into container (for example `./Volumes/Data`). Content is committed into repository.                                                                                                                                                           |
+| `Configuration/RunningInformation.txt`                              | Last known state of container- and IDS-process, written by Adame. Do not edit.                                                                                                                                                                                                           |
+| `Configuration/FileMetadata.csv`                                    | File-metadata of volumes, written by Adame. Do not edit.                                                                                                                                                                                                                                 |
+| `Configuration/.gitconfig`                                          | Git-configuration used by Adame (author, signing).                                                                                                                                                                                                                                       |
+| `Configuration/Security/Security.configuration`                     | INI: `[general]` with `gpgkeyofowner`, `remoteaddress`/`remotename`/`remotebranch` (backup-remote), `enableids`, `idsname`, `siemaddress`/`siemfolder`/`siemuser`; `[snort]` with `globalconfigurationfile`.                                                                             |
+| `Configuration/Security/Networktraffic.Custom.rules`                | Custom IDS-rules, editable.                                                                                                                                                                                                                                                              |
+| `Configuration/Security/Networktraffic.Generated.rules`             | Generated IDS-rules. Do not edit, overwritten by Adame.                                                                                                                                                                                                                                  |
+| `Configuration/Security/ApplicationProvidedSecurityInformation.xml` | Optional security-information about application.                                                                                                                                                                                                                                         |
+| `Logs/Application/`                                                 | Application-logs (mount it into container, for example `./../Logs/Application:/...`). Git-ignored.                                                                                                                                                                                       |
+| `Logs/IDS/`                                                         | IDS-logs. Git-ignored.                                                                                                                                                                                                                                                                   |
+| `Logs/Overhead/`                                                    | Logs of Adame itself. Git-ignored. Look here first when a command fails.                                                                                                                                                                                                                 |
 
 ## Hints for working with Adame-repository
 
