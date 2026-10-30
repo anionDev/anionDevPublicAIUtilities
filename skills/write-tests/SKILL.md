@@ -4,7 +4,7 @@ description: Ensures that there are tests for the most important functions of th
 metadata:
   purpose: "Development for repositories."
   tags: development, testing
-  version: 1.1.2
+  version: 1.1.3
 ---
 
 # Write Tests
@@ -33,7 +33,7 @@ Find the existing one:
 - Where do test projects/files live, and what is the naming convention (`*Tests`, `test_*.py`, `*.spec.ts`)? Put new tests exactly where the existing ones live.
 - How is a test named in this repository (`MethodName_Scenario_ExpectedResult` or otherwise)? Follow it.
 - What test utilities already exist (builders, fixtures, fakes, base classes, test containers)? Reuse them instead of writing new ad-hoc setup. Repositories following the common project structure often have a dedicated `TestUtilities` area — check it first.
-- **If the repository defines rules or scripts for tests, follow them.** For repositories using the common project structure, the test run is part of `scbuildcodeunit` — see the `common-project-structure` skill.
+- **If the repository defines rules or scripts for tests, follow them.** For repositories using the common project structure, the test run is part of `scbuildcodeunits` — see the `common-project-structure` skill.
 
 A test that is technically correct but stylistically foreign to the repository is a maintenance burden, no matter how good it is.
 
@@ -112,10 +112,10 @@ Verify that mentally — a "security test" that passes with the check deleted is
 
 ## Step 6 — Run the tests and make sure the suite is green
 
-- Run the repository's own test command (for the common project structure: `scbuildcodeunit`; exit code 0 means fine, non-zero means read the output).
+- Run the repository's own test command (for the common project structure: `scbuildcodeunits`; exit code 0 means fine, non-zero means read the output).
 - Run the **whole** suite, not just the new tests: new tests can break existing ones through shared state, and a pre-existing failure must be reported, not inherited silently.
 - Verify a new test actually can fail — if a test passes no matter what the code does, it asserts nothing.
-- If a new test fails because the production code is wrong: **report it, do not fix it silently** and do not weaken the assertion. Fixing it is the `small-fix` or `fix-error` skill's job, on the user's decision.
+- If a new test fails because the production code is wrong: **report it, do not fix it silently** and do not weaken the assertion. Fixing it is the `fix-small-bug` or `fix-error` skill's job, on the user's decision.
 
 Report at the end: which functions got tests, which cases each covers, what was deliberately not tested and why, and any bug or suspicious behavior found along the way.
 

@@ -4,7 +4,7 @@ description: Writes and updates the non-business-logic documentation of a reposi
 metadata:
   purpose: "Development for repositories."
   tags: development, documentation
-  version: 1.1.0
+  version: 1.1.1
 ---
 
 # Write Documentation
@@ -33,7 +33,7 @@ Done when:
 Before writing:
 
 - Inventory what exists: readme, reference folder, architecture/decision documents, changelog, contribution guide, doc-comments, generated API documentation, comments in configuration and build scripts.
-- **If the repository defines rules or scripts for documentation, follow them.** For repositories using the common project structure, documentation lives in the defined folders and the documentation build is part of `scbuildcodeunit` — see the `common-project-structure` skill.
+- **If the repository defines rules or scripts for documentation, follow them.** For repositories using the common project structure, documentation lives in the defined folders and the documentation build is part of `scbuildcodeunits` — see the `common-project-structure` skill.
 - Detect and keep the existing conventions: language (do not mix languages — match what the repository already uses), doc-comment style (XML-doc, JSDoc, docstrings), heading structure, terminology. If the repository maintains a domain model or glossary, use exactly its terms (see the `domain-modeling` skill).
 - Determine the audience per document: the readme is for users and newcomers, the reference folder is for maintainers and operators, doc-comments are for callers. Do not merge these.
 - Note what is **generated** (API docs from doc-comments, tables from configuration): fix the source, never the generated artifact.
@@ -66,7 +66,7 @@ Cover, in this order and only as far as it applies to this repository:
 - **Installation / getting started** — the shortest path to a working state, as commands that can be copied and that were verified in Step 2.
 - **Usage** — the two or three realistic entry-level examples, not an exhaustive API dump. Examples must be runnable as written.
 - **Configuration** — the relevant options, their defaults and their effect; secrets handling described without ever containing a real secret.
-- **Building, testing and releasing** — the repository's own commands (for the common project structure: `scbuildcodeunit`).
+- **Building, testing and releasing** — the repository's own commands (for the common project structure: `scbuildcodeunits`).
 - **Project structure** — a short map of the top-level directories, if the layout is not obvious.
 - **Contributing** — branch/commit conventions, review expectations, what must pass before a change is accepted. May be a link to a separate file.
 - **License and contact/support**.
@@ -110,7 +110,7 @@ Duplicated documentation diverges — always.
 ## Step 6 — Verify and report
 
 - Re-run the verifiable instructions after editing (Step 2 again, on the new text): every command in the readme must have been executed or at least confirmed to exist.
-- Where the repository builds its documentation, run that build (common project structure: `scbuildcodeunit`) and make sure it passes.
+- Where the repository builds its documentation, run that build (common project structure: `scbuildcodeunits`) and make sure it passes.
 - Check that all links, including the new ones, resolve.
 - Report: what was added, what was corrected, what was deleted and why, and every open question where the intent could not be determined.
 
@@ -119,7 +119,7 @@ Duplicated documentation diverges — always.
 - Do **not** invent facts. If behavior, intent or a rationale cannot be determined from the code, the history or the user, ask — a plausible-sounding wrong sentence in documentation is worse than a gap, because readers trust it.
 - Do **not** document behavior that does not exist yet, and do not describe planned features as if they were implemented.
 - Do **not** put credentials, tokens, internal URLs or other sensitive information into documentation or examples.
-- Do **not** change source code other than its comments; if the code needs a fix, report it (`small-fix` / `fix-error`).
+- Do **not** change source code other than its comments; if the code needs a fix, report it (`fix-small-bug` / `fix-error`).
 - Do **not** edit generated documentation artifacts — change their source.
 - Do **not** pad documents with generic boilerplate that is not specific to this repository.
 - Do **not** commit or push unless the user explicitly asks.

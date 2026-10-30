@@ -4,7 +4,7 @@ description: Describes how to migrate ("onboard") an existing repository so that
 metadata:
   purpose: "Migration of repositories to the common project structure."
   tags: migration, onboarding, conventions, automation, scriptcollection
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Onboarding a repository to the common-project-structure-using-scriptcollection
@@ -38,11 +38,12 @@ where `<repo>` is the absolute path to the repository.
 - `-c` runs the whole pipeline inside the standardized container, so a green run does not depend on the local machine.
 - `-r <repo>` selects the repository to build.
 
-Nothing else defines "done": as long as this command exits non-zero, the migration is not complete; once it exits 0, the repository implements the structure correctly (all codeunits build, lint, test, generate their reference, and the pipeline is idempotent).
+Nothing else defines "done": as long as this command exits non-zero, the migration is not complete; once it exits 0, the repository implements the structure correctly (all codeunits build, run their testcases and generate their reference).
+Linting-issues are only reported as warnings by this command, so its output has to be free of them as well.
 
 Therefore the whole onboarding is an iteration: change the structure, run `scbuildcodeunits -c -r <repo>`, read the error, fix the cause, repeat — until the exit-code is 0.
 
-While iterating, `-v 4` (higher verbosity) makes a failing run easier to diagnose, and `-f`/`--fastlane` (skips the testcases) can be used for a faster intermediate check — but the final, deciding run that proves the migration is finished must be the full `scbuildcodeunits -c -r <repo>` (without `-f`) and must exit 0.
+While iterating, `-v 4` (higher verbosity) makes a failing run easier to diagnose, and on a branch whose name starts with `fix/` `-f`/`--fastlane` (skips the testcases) can be used for a faster intermediate check — but the final, deciding run that proves the migration is finished must be the full `scbuildcodeunits -c -r <repo>` (without `-f`) and must exit 0.
 
 ## Look at the examples first
 
@@ -52,7 +53,7 @@ There is an official repository with one minimal example-codeunit per technology
 - Locally (if available): `E:\Data\Projects\CommonProjectStructureExamples`
 - Online: https://github.com/anionDev/CommonProjectStructureExamples (note: user `anionDev`, not the organization `anionDevelopment`)
 
-For every codeunit to be created, pick the example whose technology and type matches (for example `DotNetLibraryCodeUnit`, `DotNetConsoleCodeUnit`, `DotNetWebAPICodeUnit`, `DotNetWebAPIClientCodeUnit`, `AngularCodeUnit`, `PythonCodeUnit`, `MavenCodeUnit`, `GoCodeUnit`, `RustCodeUnit`, `DartLibraryCodeUnit`, `CPPLibrary`, `CExecutable`, `CombinedBackendFrontendCodeUnit`, or the image-only `WebAPIContainerCodeUnit` / `WebAppContainerCodeUnit`), copy its structure and adapt names and content.
+For every codeunit to be created, pick the example whose technology and type matches (for example `DotNetLibraryCodeUnit`, `DotNetConsoleCodeUnit`, `DotNetWebAPICodeUnit`, `DotNetWebAPIClientCodeUnit`, `AngularCodeUnit`, `PythonCodeUnit`, `MavenCodeUnit`, `GoCodeUnit`, `RustCodeUnit`, `DartLibraryCodeUnit`, `FlutterCodeUnit`, `CPPLibrary`, `CExecutable`, `CombinedBackendFrontendCodeUnit`, or the image-only `WebAPIContainerCodeUnit` / `WebAppContainerCodeUnit`), copy its structure and adapt names and content.
 
 The examples are minimal on purpose: copy their **shape**, not their content.
 
@@ -63,22 +64,23 @@ All paths are relative to `<repository>`.
 
 ### Repository-root overhead
 
-| Path                                                             | Hand-authored / generated | Purpose                                                                                                |
-| ---------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `.ScriptCollection/ProductInformation.xml`                       | hand-authored             | Product-level metadata (see below). Its existence is what marks a repo as using this structure.        |
-| `.ScriptCollection/OCIImages/ImageDefinition.csv`                | hand-authored             | Pinned OCI-images the pipeline/test-services use (only if container-images are needed).                |
-| `.ScriptCollection/.gitignore`                                   | hand-authored             | Ignores `/Cache/`.                                                                                     |
-| `<repository>.code-workspace`                                    | hand-authored             | The source of truth for the tasks (`tasks`-section with `aliases`); references the repo as one folder. |
-| `Taskfile.yml`                                                   | **generated**             | Generated from the `.code-workspace`-file during the build. Never edit by hand.                        |
-| `ReadMe.md`                                                      | hand-authored             | Product overview + codeunit-table.                                                                     |
-| `License.txt`                                                    | hand-authored             | License.                                                                                               |
-| `Contributing.md` / `ContributorLicenseAgreement.txt`            | hand-authored             | Contribution-rules + CLA (optional, but present in the examples).                                      |
-| `.gitignore`, `.gitattributes`, `.pylintrc`, `.betterleaks.toml` | hand-authored             | Repo-level config.                                                                                     |
-| `Other/`                                                         | mixed                     | Repository-level resources (changelog, scripts, local test-services, …); see below.                    |
-| `Other/Scripts/PrepareBuildCodeunits.py`                         | hand-authored (thin)      | Repo-level pre-build hook (delegates to `ScriptCollection.TFCPS.TFCPS_Generic`).                       |
-| `Other/Resources/Changelog/v<version>.md`                        | hand-authored             | One changelog-file per version.                                                                        |
-| `Other/Reference/RepositoryStructure.md`                         | hand-authored             | Documents what a codeunit is and the script-run-order.                                                 |
-| one folder per codeunit (`<codeunit>/`)                          | mixed                     | See "Each codeunit".                                                                                   |
+| Path                                                             | Hand-authored / generated | Purpose                                                                                                                 |
+| ---------------------------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `.ScriptCollection/ProductInformation.xml`                       | hand-authored             | Product-level metadata (see below). Its existence is what marks a repo as using this structure.                         |
+| `.ScriptCollection/OCIImages/ImageDefinition.csv`                | hand-authored             | Pinned OCI-images the pipeline/test-services use (only if container-images are needed).                                 |
+| `.ScriptCollection/.gitignore`                                   | **generated**             | Ignores `/Cache/`. Written during the build.                                                                            |
+| `<repository>.code-workspace`                                    | hand-authored             | The source of truth for the tasks (`tasks`-section with `aliases`); references the repo as one folder.                  |
+| `Taskfile.yml`                                                   | **generated**             | Generated from the `.code-workspace`-file during the build. Never edit by hand.                                         |
+| `ReadMe.md`                                                      | hand-authored             | Product overview + codeunit-table.                                                                                      |
+| `License.txt`                                                    | hand-authored             | License.                                                                                                                |
+| `.well-known/security.txt`                                       | hand-authored             | Security-contact, required by the common project structure.                                                             |
+| `Contributing.md` / `ContributorLicenseAgreement.txt`            | **generated**             | Contribution-rules + CLA. Never edit by hand.                                                                           |
+| `.gitignore`, `.gitattributes`, `.pylintrc`, `.betterleaks.toml` | hand-authored             | Repo-level config.                                                                                                      |
+| `Other/`                                                         | mixed                     | Repository-level resources (changelog, scripts, local test-services, …); see below.                                     |
+| `Other/Scripts/PrepareBuildCodeunits.py`                         | hand-authored (thin)      | Repo-level pre-build hook (delegates to ScriptCollection), generates `Taskfile.yml` and the codeunits-overview-diagram. |
+| `Other/Resources/Changelog/v<version>.md`                        | hand-authored             | One changelog-file per version.                                                                                         |
+| `Other/Reference/RepositoryStructure.md`                         | hand-authored             | Documents what a codeunit is and the script-run-order.                                                                  |
+| one folder per codeunit (`<codeunit>/`)                          | mixed                     | See "Each codeunit".                                                                                                    |
 
 AI-tooling folders (`.agents/`, `.claude/`, `.github/`, `.vscode/`, …) are present in the examples; create them only if the repository actually uses the corresponding tooling.
 The skills under `.agents/skills` are the single source of truth and are synchronized into the other agents' folders automatically by the build (see `common-project-structure-using-scriptcollection`).
@@ -158,7 +160,7 @@ Work top-down and verify continuously with the migration-target-criterion.
 
 2. **Identify the codeunits.** Decide how the existing code maps onto codeunits. The usual case is one codeunit; split into several only if there are genuinely independently-buildable parts. For each codeunit decide its technology/type and the matching example.
 
-3. **Create the repository-level overhead.** Create `.ScriptCollection/ProductInformation.xml` (adapt `producttitle`, `remoteaddress`), the `<repository>.code-workspace` (with at least the `Base: Build all codeunits` task, alias `bb`), the repo-level `Other/` (at least `Other/Resources/Changelog/`, `Other/Reference/RepositoryStructure.md`, and `Other/Scripts/PrepareBuildCodeunits.py` if the examples' one applies), and the config-files (`.gitignore`, `.pylintrc`, `.betterleaks.toml`, …). Do **not** create `Taskfile.yml` by hand — it is generated.
+3. **Create the repository-level overhead.** Create `.ScriptCollection/ProductInformation.xml` (adapt `producttitle`, `remoteaddress`), the `<repository>.code-workspace` (with at least the `Base: Build all codeunits` task, alias `bb`), the repo-level `Other/` (at least `Other/Reference/RepositoryStructure.md` and `Other/Scripts/PrepareBuildCodeunits.py`, copied from the examples, because this script generates `Taskfile.yml`), `.well-known/security.txt`, and the config-files (`.gitignore`, `.pylintrc`, `.betterleaks.toml`, …). Do **not** create `Taskfile.yml` by hand — it is generated.
 
 4. **Move each codeunit into place.** For every codeunit:
    - Create the folder `<repository>/<codeunit>/`.
@@ -167,7 +169,9 @@ Work top-down and verify continuously with the migration-target-criterion.
    - Fix the paths that the technology-specific files assume (for .NET: `OutputPath`, `DocumentationFile`, `ErrorLog`, strong-name-key path, the `.nuspec`-file-references, `docfx.json`-source-path, the `InternalsVisibleTo` of the test-project, …). The example is the reference for what these should point to.
    - Declare dependencies between codeunits in `dependentcodeunits` of the `codeunit.xml` and consume them only through `<codeunit>/Other/Resources/DependentCodeUnits` (see `common-project-structure`).
 
-5. **Run the migration-target-criterion and iterate.** Run:
+5. **Create the changelog-entry.** Determine the version with `scshowprojectversion` and create `Other/Resources/Changelog/v<version>.md`, for example with `sccreatechangelogentry -m "<message>"`. This has to happen before the next step because the build fails if this file does not exist.
+
+6. **Run the migration-target-criterion and iterate.** Run:
 
    ```text
    scbuildcodeunits -c -r <repo> -v 4
@@ -179,9 +183,8 @@ Work top-down and verify continuously with the migration-target-criterion.
    scbuildcodeunits -c -r <repo>
    ```
 
-   When this exits with 0, the onboarding is finished.
-
-6. **Create the changelog-entry.** Determine the version with `scshowprojectversion` (after the changes) and create `Other/Resources/Changelog/v<version>.md`.
+   When this exits with 0 and its output contains no linting-issues, the onboarding is finished.
+   If the version changed in the meantime, create the changelog-entry for the new version as well.
 
 ## Hints and pitfalls
 

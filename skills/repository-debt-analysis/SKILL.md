@@ -4,7 +4,7 @@ description: Analyzes a repository for technical debt and non-functional weaknes
 metadata:
   purpose: "Analysis for repositories."
   tags: analysis, technical-debt
-  version: 1.1.1
+  version: 1.1.2
 ---
 
 # Repository Technical-Debt Analysis
@@ -213,7 +213,7 @@ The report is a work list, not an essay.
 ## Non-goals
 
 - Do **not** change, fix, refactor, reformat or reorganize any file. This skill produces a report
-  only. If the user wants fixes afterwards, that is the `improve-product`, `small-fix` or
+  only. If the user wants fixes afterwards, that is the `improve-product`, `fix-small-bug` or
   `project-linting` skill's job.
 - Do **not** create issues, branches or commits.
 - Do **not** report findings without a concrete location and evidence.
