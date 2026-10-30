@@ -235,7 +235,7 @@ Report to the user, concisely:
 - **Explicitly and prominently: every change from either side that was intentionally dropped**, and
   why. This is the information the user cannot recover by reading the diff.
 - Any semantic conflicts found in files that were not themselves conflicted.
-- Any decisions that remain open / need the user's judgement.
+- Any decisions that remain open / need the user's judgment.
 
 ## Non-goals
 

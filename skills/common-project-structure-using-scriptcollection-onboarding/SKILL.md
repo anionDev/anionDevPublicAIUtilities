@@ -177,7 +177,7 @@ Work top-down and verify continuously with the migration-target-criterion.
 ## Hints and pitfalls
 
 - **The criterion is the container-run.** A build that only works with a locally-run `scbuildcodeunits` (without `-c`) but not with `-c` is not finished — the standardized container is what makes the result reproducible.
-- **Do not put logic into the scripts.** The codeunit-scripts only delegate to ScriptCollection. If a behaviour is missing or wrong, the fix usually belongs into the ScriptCollection-repository, not into these scripts. Do not reimplement pipeline-logic in the repository.
+- **Do not put logic into the scripts.** The codeunit-scripts only delegate to ScriptCollection. If a behavior is missing or wrong, the fix usually belongs into the ScriptCollection-repository, not into these scripts. Do not reimplement pipeline-logic in the repository.
 - **Do not edit generated files.** `Taskfile.yml`, the generated diagrams/references, the synchronized agent-skill-folders and the generated constant-value-files are derived; a manual change is lost on the next build. Change the source instead (for tasks: the `.code-workspace`-file).
 - **Pin versions explicitly.** Dependencies and tool-/image-versions must be pinned to exact versions (see the examples: exact-version brackets in `.csproj`, pinned tags in `ImageDefinition.csv`). Do not use "latest".
 - **Keep the history.** Use `git mv` when relocating existing files so blame/history survive the migration.

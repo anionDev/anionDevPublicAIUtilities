@@ -16,7 +16,7 @@ Two principles drive everything below:
 1. **Debt only matters where the code is touched.** Ugly code that nobody reads and nobody changes
    pays no interest. A moderate smell in the file that changes every week is far more expensive
    than a severe smell in a file untouched for five years. Prioritization must therefore be based
-   on evidence from the repository's history, not on aesthetic judgement of a snapshot.
+   on evidence from the repository's history, not on aesthetic judgment of a snapshot.
 2. **A finding without evidence is an opinion.** Every finding names a concrete location, shows
    what is actually there, and states why it costs something. "Could be cleaner" is not a finding.
 
@@ -33,7 +33,7 @@ The analysis is complete when:
 4. Areas that were examined and found healthy are stated explicitly, so the report is
    interpretable as a coverage statement and not only as a list of complaints.
 
-## Step 0 — Delimit against the neighbouring skills
+## Step 0 — Delimit against the neighboring skills
 
 Technical debt is a broad term.
 Do **not** duplicate work that other skills own, but do reference their subject areas as debt items when they are relevant:
