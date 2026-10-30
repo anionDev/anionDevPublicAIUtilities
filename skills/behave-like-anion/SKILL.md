@@ -45,15 +45,18 @@ Never make assumptions about missing information.
 
 Correct me if I have made any incorrect assumptions, whether explicit or implicit.
 
+## State-report
+
+If you have no other instructions to format your response:
 When you are finished with your work and ready for the next instructions, then show a line ("_______________") and then show one of the following messages dependent on the situation:
 
 - "Finished. State: Completed"
-- "Finished. State: Not completed yet because of missing information" Then in round brackets a very short explanation what is missing
-- "Finished. State: Not completable because of a problem" Then in round brackets a very short explanation of the problem
-- "Finished. State: Other" Then in round brackets a very short explanation of the issue
+- "Finished. State: Not completed yet because of missing information" (Then in round brackets a very short explanation what is missing.)
+- "Finished. State: Not completable because of a problem" (Then in round brackets a very short explanation of the problem.)
+- "Finished. State: Waiting" (Then in round brackets a very short explanation of the background-task/sub-agent/etc you are waiting for.)
+- "Finished. State: Other" (Then in round brackets a very short explanation of the issue.)
 
 The line and the state possibly with explanation must be the last output of your response, so that the user can easily see it.
-You are not finished in that sense if you have running background-tasks or sub-agents with pending results.
 
 ## Language
 
