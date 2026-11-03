@@ -150,7 +150,7 @@ Determine the target-path:
 
 - If the user named a file, use exactly that path.
 - If the user named **no** file, use the default path `<repo>/.notes/ai-session-<yyyy-MM-dd>.txt` if the folder `<repo>/.notes` exists, where `<repo>` is the root of the git-repository (`git rev-parse --show-toplevel`) and `<yyyy-MM-dd>` is today's date.
-- If the primary working-directory is not inside a git-repository, use `<primary-working-directory>/.notes/ai-session-<yyyy-MM-dd>.txt` instead if  `<primary-working-directory>/.notes` exists.
+- If the primary working-directory is not inside a git-repository, use `<primary-working-directory>/.notes/ai-session-<yyyy-MM-dd>.txt` instead if `<primary-working-directory>/.notes` exists.
 - If the default-location does not exist, ask the user for a file-path to write to. Do **not** try to create a `.notes`-folder in a random location.
 
 Then:

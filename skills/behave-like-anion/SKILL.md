@@ -79,11 +79,11 @@ When investigating issues: In the end show a summary to the user which contains 
 ## Developing
 
 Use clean-code-principles when developing code.
-Never add fallback-mechanisms or optional parameter with a default value unless the user explicitly asks for it.
+Never add fallback-mechanisms or optional parameters with a default value unless the user explicitly asks for it.
 Use design-pattern when developing code when it is useful.
 To check whether it would be useful think about advantages for the future like a better overview and extensibility.
 Never develop a loop which waits until something works which tries again on fail unless the user explicitly asks for it.
-Never develop an exception-catchings-mechanism when the catch-block is doing basically the same but on another way as fallback-mechanism unless the user explicitly asks for it.
+Never develop an exception-catching-mechanism when the catch-block is doing basically the same but in another way as fallback-mechanism unless the user explicitly asks for it.
 Avoid spaghetti-code.
 Try to make related changes at similar places as much as possible.
 Always follow existing coding-style and coding-conventions.

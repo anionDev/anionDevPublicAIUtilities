@@ -21,4 +21,4 @@ The structure of the software must always follow the following principles:
 - Encapsulate non-trivial logic in a separate component or module or function, dependent on the complexity and amount of lines of code.
 - Performance is always important.
 - Clean-code and readability are more important than performance unless the user explicitly desires the opposite.
-- Maintainability and extensibility are more important than Clean-code and readability unless the user explicitly desires the opposite.
+- Maintainability and extensibility are more important than clean-code and readability unless the user explicitly desires the opposite.

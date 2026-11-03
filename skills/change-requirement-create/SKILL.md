@@ -1,6 +1,6 @@
 ---
 name: change-requirement-create
-description: Skill for creating change requirements. Only applicable for repositories which uses openspec.
+description: Skill for creating change requirements. Only applicable for repositories which use openspec.
 disable-model-invocation: true
 metadata:
   version: 1.2.0

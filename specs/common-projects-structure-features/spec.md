@@ -3,7 +3,7 @@
 ## Purpose
 
 Every product maintains a single list of the features which a user can expect from it.
-This list is the one place which answers, from the perspective of a user and not of the source-code, what the product can do and what it can not do yet.
+This list is the one place which answers, from the perspective of a user and not of the source-code, what the product can do and what it cannot do yet.
 
 A feature-list is only useful if it is complete and if it is honest: it has to contain every feature which a user can observe, including the features which are planned but not implemented yet, and the stated availability of every feature has to be the one which the source-code of the current branch actually provides.
 A list which silently drops a planned feature stops being an overview of what is planned, and a list whose availability does not follow the source-code misleads the reader about what the product can do.
@@ -37,20 +37,20 @@ Other documents MAY give a shorter overview of features, but this table SHALL be
 
 The table MUST have exactly the following columns in this order, with exactly these column-names:
 
-- `id`: the id of the feature.
-- `state`: the availability of the feature.
-- `description`: what the feature is, described from the perspective of a user.
+- `Id`: the id of the feature.
+- `State`: the availability of the feature.
+- `Description`: what the feature is, described from the perspective of a user.
 
 No further column SHALL be added to the table.
 
 #### Scenario: The table is written
 
 - **WHEN** the feature-table is created or a row is added
-- **THEN** the table has exactly the columns `id`, `state` and `description` in this order and no other column
+- **THEN** the table has exactly the columns `Id`, `State` and `Description` in this order and no other column
 
 #### Scenario: Further information exists for a feature
 
-- **WHEN** there is further information about a feature which does not fit into `id`, `state` or `description`
+- **WHEN** there is further information about a feature which does not fit into `Id`, `State` or `Description`
 - **THEN** it is not added as a further column but is placed where it belongs (for example in the technical documentation),
   because the feature-table keeps exactly these three columns
 
@@ -72,10 +72,10 @@ An id MUST never be reused for another feature, not even after a feature was rem
 
 ### Requirement: The state of a feature has a fixed set of values
 
-The column `state` of every feature MUST have exactly one of the following values and no other value:
+The column `State` of every feature MUST have exactly one of the following values and no other value:
 
 - `available`: a user can use the feature in the current state of the product.
-- `unavailable`: a user can not use the feature yet in the current state of the product.
+- `unavailable`: a user cannot use the feature yet in the current state of the product.
 
 #### Scenario: A state outside the set is written
 
@@ -94,19 +94,19 @@ A feature which is planned but not implemented yet SHALL stay in the list with t
 
 #### Scenario: A feature is planned
 
-- **WHEN** a feature is planned for the product but a user can not use it yet
+- **WHEN** a feature is planned for the product but a user cannot use it yet
 - **THEN** it is listed as a row with the state `unavailable` and is not left out
 
 #### Scenario: An entry is not a user-facing feature
 
-- **WHEN** a row describes an internal detail which a user can not observe instead of a feature which a user can expect
+- **WHEN** a row describes an internal detail which a user cannot observe instead of a feature which a user can expect
 - **THEN** it does not belong into this table and is removed or moved to the technical documentation
 
 ### Requirement: The state of a feature reflects the current state of the source-code
 
-The `state` of every feature SHALL be the one which the source-code of the current branch implements, determined by checking the source-code itself and not the documentation or comments.
+The `State` of every feature SHALL be the one which the source-code of the current branch implements, determined by checking the source-code itself and not the documentation or comments.
 A feature is `available` if and only if a user can actually use it in the current state of the source-code; otherwise it is `unavailable`.
-A feature whose availability changed SHALL have its `state` corrected, and it SHALL NOT be removed from the table because of such a change.
+A feature whose availability changed SHALL have its `State` corrected, and it SHALL NOT be removed from the table because of such a change.
 
 #### Scenario: A feature became usable
 

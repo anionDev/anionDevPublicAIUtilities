@@ -53,7 +53,7 @@ There is an official repository with one minimal example-codeunit per technology
 - Locally (if available): `E:\Data\Projects\CommonProjectStructureExamples`
 - Online: https://github.com/anionDev/CommonProjectStructureExamples (note: user `anionDev`, not the organization `anionDevelopment`)
 
-For every codeunit to be created, pick the example whose technology and type matches (for example `DotNetLibraryCodeUnit`, `DotNetConsoleCodeUnit`, `DotNetWebAPICodeUnit`, `DotNetWebAPIClientCodeUnit`, `AngularCodeUnit`, `PythonCodeUnit`, `MavenCodeUnit`, `GoCodeUnit`, `RustCodeUnit`, `DartLibraryCodeUnit`, `FlutterCodeUnit`, `CPPLibrary`, `CExecutable`, `CombinedBackendFrontendCodeUnit`, or the image-only `WebAPIContainerCodeUnit` / `WebAppContainerCodeUnit`), copy its structure and adapt names and content.
+For every codeunit to be created, pick the example whose technology and type match (for example `DotNetLibraryCodeUnit`, `DotNetConsoleCodeUnit`, `DotNetWebAPICodeUnit`, `DotNetWebAPIClientCodeUnit`, `AngularCodeUnit`, `PythonCodeUnit`, `MavenCodeUnit`, `GoCodeUnit`, `RustCodeUnit`, `DartLibraryCodeUnit`, `FlutterCodeUnit`, `CPPLibrary`, `CExecutable`, `CombinedBackendFrontendCodeUnit`, or the image-only `WebAPIContainerCodeUnit` / `WebAppContainerCodeUnit`), copy its structure and adapt names and content.
 
 The examples are minimal on purpose: copy their **shape**, not their content.
 

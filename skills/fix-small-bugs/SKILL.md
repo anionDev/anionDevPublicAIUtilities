@@ -9,4 +9,4 @@ metadata:
 
 # Skill fix-bugs
 
-Use the `fix-small-bug` skill to find and fix as much small bugs in the repository as possible.
+Use the `fix-small-bug` skill to find and fix as many small bugs in the repository as possible.

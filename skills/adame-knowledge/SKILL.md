@@ -1,6 +1,6 @@
 ---
 name: adame-knowledge
-description: Gives information about how to use adame and how to use a adame-repository.
+description: Gives information about how to use adame and how to use an adame-repository.
 metadata:
   purpose: server-maintenance
   tags: server-management

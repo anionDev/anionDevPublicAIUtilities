@@ -81,6 +81,6 @@ metadata:
 
 - Never fabricate weather data — always fetch it from Open-Meteo before answering.
 - Never fabricate or silently assume a location either. Only use an unstated location if it can be reasonably estimated from real context clues (see step 1); otherwise ask the user first.
-- If the location can not be resolved (geocoding returns no results), say so and ask the user for a more specific place name or coordinates.
+- If the location cannot be resolved (geocoding returns no results), say so and ask the user for a more specific place name or coordinates.
 - For requests beyond Open-Meteo's reliable forecast horizon (~16 days) or for historical data, tell the user this is out of scope rather than presenting speculative numbers as fact.
 - Keep the report short and conversational; do not dump raw API JSON at the user.

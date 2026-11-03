@@ -4,7 +4,7 @@ description: Builds or cleans up a git .mailmap file for a repository, consolida
 metadata:
   purpose: "Maintenance for repositories."
   tags: maintenance, git
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Git `.mailmap` Cleanup
@@ -83,6 +83,8 @@ For each raw identity:
    the mailmap and flag it as unresolved instead.
 
 Apply confirmed corrections one at a time as the user reports them (this is typically an iterative, interactive process — the user may independently check `git log --author="<raw-identity>"` themselves and report back the real name).
+
+If `.mailmap` does not exist yet, create it at the repository root only when there is at least one entry to write into it; if no identities have to be merged, do not create the file.
 
 ## Step 5 — Re-verify after every batch of edits
 
