@@ -3,8 +3,8 @@ name: format-markdown-file
 description: Formats a markdown file.
 metadata:
   purpose: "Formats markdown files."
-  tags: linting, formatting
-  version: 1.0.1
+  tags: linting, formatting, markdown
+  version: 1.0.2
 ---
 
 # Format Markdown File
@@ -22,3 +22,4 @@ A markdown file is correctly formatted if it adheres to the following rules:
 - A multiline codeblock provides a language identifier after the opening backticks and uses "text" if the language is unknown or if no suitable language is available.
 - Do not change texts which come clearly from external, for example generated files or texts with copyright notices and common license-texts.
 - Never change a license-file, unless you are explicitly instructed to do so.
+- If a link is broken or incorrect, it should be fixed if the correct link-target can be derived.
